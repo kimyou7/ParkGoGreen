@@ -1,5 +1,9 @@
 # csc648-team13
 
-- TODO
+- TODO:
 
 - all team members clones the repo
+
+- initialize local with master
+
+- working progress.....
