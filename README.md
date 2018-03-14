@@ -2,10 +2,9 @@
 
 - TODO:
 
-- all team members clones the repo
+Milestone 2
+- Vertical protoype
 
-- initialize local with master
+- Mockups, storyboards
 
-- create a Team Website and ABOUT page > ABOUT page and portfolio – photo is optional
-
-- working progress....
+- Milestone 2 document
