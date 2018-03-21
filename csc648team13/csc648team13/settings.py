@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'csc648team13.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'parksgogreen',
-        'USER': 'user',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'project',
+        'USER': 'root',
+        'PASSWORD': 'Google325!',
+        'HOST': '35.184.199.70',
+        'PORT': '3306',
     }
 }
 
