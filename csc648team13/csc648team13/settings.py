@@ -25,7 +25,7 @@ SECRET_KEY = 'r3*uk$$^113=@r!jmh#w)k^9dyc$$=54m$pm9vq(rp$yoaovwv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '35.203.171.59', '127.0.0.1', 'https://csc648team13.com/']
+ALLOWED_HOSTS = ['localhost', '35.230.115.156', '127.0.0.1', 'https://csc648team13.com/']
 
 
 # Application definition
