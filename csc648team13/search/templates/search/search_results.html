@@ -1,0 +1,21 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Park Search</title>
+</head>
+<body>
+    <p>You searched for: <strong>{{ query }}</strong></p>
+
+    {% if reports %}
+        <p>Found {{ reports|length }} park{{ reports|pluralize }}.</p>
+        <u1>
+            {% for park in reports %}
+            <li>{{ park.name }} -- {{ park.address }} -- {{ park.status }}</li>
+            {% endfor %}
+        </u1>
+    {% else %}
+        <p>No books matches your search criteria.</p>
+    {% endif %}
+</body>
+</html>
