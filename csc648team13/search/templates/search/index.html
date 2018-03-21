@@ -1,0 +1,8 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'search/style.css' %}" />
+
+<form action="{% url 'search:results' %}" method="get">
+    <input type="text" name="q">
+    <input type="submit" value="Search">
+</form>
