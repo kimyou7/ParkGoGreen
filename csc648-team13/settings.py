@@ -25,7 +25,7 @@ SECRET_KEY = 'r3*uk$$^113=@r!jmh#w)k^9dyc$$=54m$pm9vq(rp$yoaovwv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '35.230.115.156', '127.0.0.1', 'https://csc648team13.com/']
+ALLOWED_HOSTS = ['localhost', '35.230.115.156', '127.0.0.1', 'https://csc648-team13.com/']
 
 
 # Application definition
@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'csc648team13.urls'
+ROOT_URLCONF = 'csc648-team13.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'csc648team13.wsgi.application'
+WSGI_APPLICATION = 'csc648-team13.wsgi.application'
 
 
 # Database
