@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'search.apps.SearchConfig',
-
-    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [
@@ -130,7 +128,7 @@ ENV_PATH = os.path.abspath(os.path.dirname(__file__))
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_ROOT = os.path.join(ENV_PATH, 'static/')
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Media files (Images)
 # https://docs.djangoproject.com/en/2.0/topics/files/
