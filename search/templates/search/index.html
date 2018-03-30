@@ -6,3 +6,6 @@
     <input type="text" name="q" placeholder="Park name">
     <input type="submit" value="Search">
 </form>
+
+{% load thumbnail %}
+<img src="{% thumbnail "stockpark.jpg" 50x50 crop %}" alt="" />
