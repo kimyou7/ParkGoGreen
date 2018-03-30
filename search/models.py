@@ -9,16 +9,12 @@ from django.db import models
 
 
 class Park(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
-    status = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
+    status = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
-
-    class Meta:
-        db_table = 'park'
 
 
 class Category(models.Model):
@@ -26,3 +22,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.type
+
+
+class Status(models.Model):
+    current_status = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.current_status
