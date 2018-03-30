@@ -19,3 +19,10 @@ class Park(models.Model):
 
     class Meta:
         db_table = 'park'
+
+
+class Category(models.Model):
+    type = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.type
