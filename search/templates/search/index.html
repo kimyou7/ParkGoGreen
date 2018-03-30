@@ -3,8 +3,14 @@
 <link rel="stylesheet" type="text/css" href="{% static 'search/style.css' %}" />
 
 <form action="{% url 'search:results' %}" method="get">
-    <input type="text" name="q" placeholder="Park name">
-    <input type="submit" value="Search">
+  <input type="text" name="q" placeholder="Park name">
+<select>
+    <option value="" selected hidden>Select a category</option>
+    <option value="park.name">Name</option>
+    <option value="park.address">Address</option>
+    <option value="park.status">Status</option>
+</select>
+  <input type="submit" value="Search">
 </form>
 
 <a target="_blank" href="media/stockpark.jpg">
