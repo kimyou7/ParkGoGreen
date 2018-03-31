@@ -6,7 +6,8 @@ from .models import Park, Report, Category, Status
 
 
 def index(request):
-    return render(request, 'search/index.html')
+    categories = Category.objects.all()
+    return render(request, 'search/index.html', {'categories': categories})
 
 
 def results(request):

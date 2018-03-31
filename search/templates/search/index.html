@@ -6,9 +6,9 @@
   <input type="text" name="q" placeholder="Search by park name" autocomplete="off">
   <select>
     <option value="" selected hidden>Select a category</option>
-    <option value="park.name">Name</option>
-    <option value="park.address">Address</option>
-    <option value="park.status">Status</option>
+      {% for category in categories %}
+          <option value={{ category.type }}>{{ category.type }}</option>
+      {% endfor %}
   </select>
   <input type="submit" value="Search">
 </form>
