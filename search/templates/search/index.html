@@ -1,7 +1,17 @@
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'search/style.css' %}" />
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116677924-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
+        gtag('config', 'UA-116677924-1');
+    </script>
+</head>
 <form action="{% url 'search:results' %}" method="get">
   <input type="text" name="q" placeholder="Search by park name" autocomplete="off">
   <select name="dropdown">
