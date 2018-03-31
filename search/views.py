@@ -1,17 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import DetailView
 
-from .models import Park
+from .models import Park, Report, Category, Status
+
 
 def index(request):
     return render(request, 'search/index.html')
 
+
 def results(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
-        reports = Park.objects.filter(name__icontains=q)
+        reports = Report.objects.filter(park__name__icontains=q)
         return render(request, 'search/search_results.html', {'reports': reports, 'query': q})
     else:
         q = ""
-        reports = Park.objects.all()
+        reports = Report.objects.all()
         return render(request, 'search/search_results.html', {'reports': reports, 'query': q})

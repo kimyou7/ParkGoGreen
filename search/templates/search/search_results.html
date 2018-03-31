@@ -1,3 +1,5 @@
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,8 +12,8 @@
     {% if reports %}
         <p>Found {{ reports|length }} park{{ reports|pluralize }}.</p>
         <u1>
-            {% for park in reports %}
-            <li>{{ park.name }} -- {{ park.address }} -- {{ park.status }}</li>
+            {% for issue in reports %}
+            <li><img src="../{{ MEDIA_URL }}{{ issue.image }}"/> {{ issue.park.name }} -- {{ issue.sub_date }} -- {{ issue.description }}</li>
             {% endfor %}
         </u1>
     {% else %}

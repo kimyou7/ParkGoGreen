@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'search/style.css' %}" />
 
 <form action="{% url 'search:results' %}" method="get">
-  <input type="text" name="q" placeholder="Park name" autocomplete="off">
+  <input type="text" name="q" placeholder="Search by park name" autocomplete="off">
   <select>
     <option value="" selected hidden>Select a category</option>
     <option value="park.name">Name</option>
@@ -13,12 +13,6 @@
   <input type="submit" value="Search">
 </form>
 
-<iframe width="600" height="450" frameborder="0" style="border:0" 
+<iframe width="400" height="400" frameborder="0" style="border:0"
   src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJY_dFYHKHhYARMKc772iLvnE&key=AIzaSyBMDvz4zozQwoRPNcXrFX8OCGDp6c1FL7E" allowfullscreen>
 </iframe>
-
-<img width="400" src="https://maps.googleapis.com/maps/api/staticmap?center=Mission+Dolores+Park&zoom=13&scale=1&size=400x400&maptype=roadmap&key=AIzaSyD_g-oOuyVFlnlCbL7JLkO9wt-UOWruIMg&format=png&visual_refresh=true" alt="Google Map of Mission Dolores Park">
-
-<a target="_blank" href="media/stockpark.jpg">
-  <img src="media/stockpark.jpg" alt="Forest">
-</a>
