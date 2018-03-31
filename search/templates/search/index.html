@@ -4,7 +4,7 @@
 
 <form action="{% url 'search:results' %}" method="get">
   <input type="text" name="q" placeholder="Search by park name" autocomplete="off">
-  <select>
+  <select name="dropdown">
     <option value="" selected hidden>Select a category</option>
       {% for category in categories %}
           <option value={{ category.type }}>{{ category.type }}</option>

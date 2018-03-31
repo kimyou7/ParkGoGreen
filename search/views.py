@@ -13,8 +13,10 @@ def index(request):
 def results(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
-        reports = Report.objects.filter(park__name__icontains=q)
-        return render(request, 'search/search_results.html', {'reports': reports, 'query': q})
+        t = request.GET['dropdown']
+        reports = Report.objects.filter(park__name__icontains=q, type__type__iexact=t)
+        all_reports = Report.objects.all()
+        return render(request, 'search/search_results.html', {'reports': reports, 'query': q, 'all_reports': all_reports})
     else:
         q = ""
         reports = Report.objects.all()
