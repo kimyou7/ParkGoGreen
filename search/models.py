@@ -46,4 +46,4 @@ class Report(models.Model):
     park = models.ForeignKey(Park, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.park.name + " " + self.sub_date
+        return self.park.name + " " + str(self.sub_date)
