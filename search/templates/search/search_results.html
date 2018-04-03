@@ -13,7 +13,7 @@
         <p>Found {{ reports|length }} park{{ reports|pluralize }}.</p>
         <u1>
             {% for issue in reports %}
-            <li><img src="../{{ issue.image.url }}"/> {{ issue.park.name }} -- {{ issue.sub_date }} -- {{ issue.description }}
+            <li><img src="../{{ issue.thumbnail.url }}"/> {{ issue.park.name }} -- {{ issue.sub_date }} -- {{ issue.description }}
                 <iframe width="400" height="400" frameborder="0" style="border:0"
                     src="{{ issue.park.maps_string }}" allowfullscreen>
                 </iframe>
@@ -24,7 +24,7 @@
         <p>No park matches your search criteria, here are all reports.</p>
         <u1>
         {% for issue in all_reports %}
-            <li><img src="../{{ issue.image.url }}"/> {{ issue.park.name }} -- {{ issue.sub_date }} -- {{ issue.description }}
+            <li><img src="../{{ issue.thumbnail.url }}"/> {{ issue.park.name }} -- {{ issue.sub_date }} -- {{ issue.description }}
                 <iframe width="400" height="400" frameborder="0" style="border:0"
                     src="{{ issue.park.maps_string }}" allowfullscreen>
                 </iframe>
