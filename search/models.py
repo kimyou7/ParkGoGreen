@@ -10,6 +10,7 @@ from PIL import Image
 from io import BytesIO
 from django.core.files.base import ContentFile
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 
 
@@ -49,6 +50,7 @@ class Report(models.Model):
     type = models.ForeignKey(Category, on_delete=models.CASCADE)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     park = models.ForeignKey(Park, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.park.name + " " + str(self.sub_date)
