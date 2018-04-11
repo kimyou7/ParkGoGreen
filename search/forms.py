@@ -1,0 +1,9 @@
+from django.forms import ModelForm
+
+from .models import Report, User
+
+class ReportForm(ModelForm):
+
+    class Meta:
+        model = Report
+        fields = ['description', 'image', 'type', 'status', 'park']

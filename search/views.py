@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import DetailView
 
-from .models import Park, Report, Category, Status
+from .models import Park, Report, Category
+from .forms import ReportForm
 
 
 def index(request):
@@ -21,3 +22,20 @@ def results(request):
         q = ""
         reports = Report.objects.all()
         return render(request, 'search/search_results.html', {'reports': reports, 'query': q})
+
+
+def get_report(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ReportForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            form.save()
+            # redirect to a new URL:
+            return HttpResponseRedirect('')
+    else:
+        form = ReportForm
+
+    return render(request, 'report.html', {'form': form})
