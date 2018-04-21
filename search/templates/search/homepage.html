@@ -11,7 +11,6 @@
 <div class="container">
 
 
-
     <div class="row" style="float: right">
         <form>
             <div class="form-group">
@@ -50,7 +49,7 @@
         <select name="dropdown">
             <option value="" selected hidden>Select a category</option>
             {% for category in categories %}
-                <option value={{ category.type }}>{{ category.type }}</option>
+            <option value={{ category.type }}>{{ category.type }}</option>
             {% endfor %}
         </select>
         <input type="text" name="q" placeholder="Search by park name" autocomplete="off">
@@ -58,7 +57,9 @@
     </form>
 </center>
 
-<center style="padding-bottom: 10px"> Our website is dedicated to solving any and all environmental issues in your local parks! </center>
+<center style="padding-bottom: 10px"> Our website is dedicated to solving any and all environmental issues in your local
+    parks!
+</center>
 
 <body>
 
@@ -73,18 +74,15 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" style="">
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
+                    <a class="btn btn-dark btn-lg" class="nav-link" href="about.html">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="services.html">Home</a>
+                    <a class="btn btn-dark btn-lg" class="nav-link" href="contact.html">Post Report</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Post Report</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-dark btn-lg" class="nav-link" href="contact.html">Contact Us</a>
                 </li>
 
             </ul>
@@ -100,60 +98,51 @@
 <h2 style="padding: 50px;"> Listings</h2>
 
 
-<div class="container">
+<div class="row">
 
-    <div class="row">
-        <section>
-            <div class="container" style="padding-bottom: 40px">
-                <div class="card" style="width: 80%;">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div style="float: left;" class="card-img-bottom">
-                                <img class="card-img-top" src="http://placehold.it/700x400" alt="">
-                            </div>
+    <section>
+        <div class="container" style="padding-bottom: 40px">
+            <div class="card" style="width: 80%;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="float: left;" class="card-img-bottom">
+                            <img class="card-img-top" src="http://placehold.it/700x400" alt="">
                         </div>
-                        <div class="col-md-6">
-                            <div class="card-block">
-                                <h4 class="card-title">Curabitur gravida vestibulum imperdiet.</h4>
-                                <p class="card-text">Cras convallis ut turpis vitae facilisis. Morbi eu augue vel quam
-                                    efficitur rhoncus vitae eget lectus. Cras augue ligula, aliquam ut enim ut, feugiat
-                                    imperdiet sem. Integer sed mi quis nisl eleifend interdum.</p>
-                                <p class="card-text">Cras convallis ut turpis vitae facilisis. Morbi eu augue vel quam
-                                    efficitur rhoncus vitae eget lectus. Cras augue ligula, aliquam ut enim ut, feugiat
-                                    imperdiet sem.</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
-                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-block">
+                            <h4 class="card-title"></h4>
+                            <p class="card-text">Subject:</p>
+                            <p class="card-text">Location:</p>
+                            <a href="#" class="btn btn-dark">Read More</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <section>
-            <div class="container">
-                <div class="card" style="width: 80%;">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div style="float: left;" class="card-img-bottom">
-                                <img class="card-img-top" src="http://placehold.it/700x400" alt="">
-                            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="card" style="width: 80%;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="float: left;" class="card-img-bottom">
+                            <img class="card-img-top" src="http://placehold.it/700x400" alt="">
                         </div>
-                        <div class="col-md-6">
-                            <div class="card-block">
-                                <h4 class="card-title">Curabitur gravida vestibulum imperdiet.</h4>
-                                <p class="card-text">Cras convallis ut turpis vitae facilisis. Morbi eu augue vel quam
-                                    efficitur rhoncus vitae eget lectus. Cras augue ligula, aliquam ut enim ut, feugiat
-                                    imperdiet sem. Integer sed mi quis nisl eleifend interdum.</p>
-                                <p class="card-text">Cras convallis ut turpis vitae facilisis. Morbi eu augue vel quam
-                                    efficitur rhoncus vitae eget lectus. Cras augue ligula, aliquam ut enim ut, feugiat
-                                    imperdiet sem.</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
-                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-block">
+                            <h4 class="card-title"></h4>
+                            <p class="card-text">Subject:</p>
+                            <p class="card-text">Location:</p>
+                            <a href="#" class="btn btn-dark">Read More</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+
 </div>
 <!-- /.row -->
 
