@@ -1,0 +1,167 @@
+{% load static %}
+<center>SFSU Software Engineering Project, Spring 2018</center>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="stylesheet" type="text/css" href="{% static 'search/style.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'search/bootstrap.min.css' %}"/>
+<!--<link rel="stylesheet" type="text/css" href="{% static 'search/modern-business.css' %}" />-->
+<img src="{% static "search/Park Go Green.png" %}" style="float: left"/>
+<div class="container">
+
+
+    <div class="row" style="float: right">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                       placeholder="Enter username">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+
+        </form>
+        <form>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Park Go Green</title>
+
+
+</head>
+<h1 class="my-4"></h1>
+<center>
+    <form style="padding-bottom: 50px;" action="{% url 'search:results' %}" method="get">
+        <select name="dropdown">
+            <option value="" selected hidden>Select a category</option>
+            {% for category in categories %}
+            <option value={{ category.type }}>{{ category.type }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="q" placeholder="Search by park name" autocomplete="off">
+        <input type="submit" value="Search" class="btn btn-default">
+    </form>
+</center>
+
+<center style="padding-bottom: 10px"> Our website is dedicated to solving any and all environmental issues in your local
+    parks!
+</center>
+
+<body>
+
+
+<!-- Navigation -->
+<nav class="navbar-expand-lg navbar-dark bg-dark navbar-default">
+    <div class="container">
+
+        <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav" style="">
+                <li class="nav-item">
+                    <a class="btn btn-dark btn-lg" class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-dark btn-lg" class="nav-link" href="contact.html">Post Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-dark btn-lg" class="nav-link" href="contact.html">Contact Us</a>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<!-- Page Content -->
+
+
+<!-- Portfolio Section -->
+<h2 style="padding: 50px;"> Listings</h2>
+
+
+<div class="row">
+
+    <section>
+        <div class="container" style="padding-bottom: 40px">
+            <div class="card" style="width: 80%;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="float: left;" class="card-img-bottom">
+                            <img class="card-img-top" src="http://placehold.it/700x400" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-block">
+                            <h4 class="card-title"></h4>
+                            <p class="card-text">Subject:</p>
+                            <p class="card-text">Location:</p>
+                            <a href="#" class="btn btn-dark">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="card" style="width: 80%;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="float: left;" class="card-img-bottom">
+                            <img class="card-img-top" src="http://placehold.it/700x400" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-block">
+                            <h4 class="card-title"></h4>
+                            <p class="card-text">Subject:</p>
+                            <p class="card-text">Location:</p>
+                            <a href="#" class="btn btn-dark">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<!-- /.row -->
+
+
+<hr>
+
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
