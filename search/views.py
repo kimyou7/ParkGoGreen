@@ -8,7 +8,7 @@ from .forms import ReportForm
 
 def index(request):
     categories = Category.objects.all()
-    return render(request, 'search/index.html', {'categories': categories})
+    return render(request, 'search/homepage.html', {'categories': categories})
 
 
 def results(request):
