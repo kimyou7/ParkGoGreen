@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.views import generic
 from django.utils import timezone
 
-from .models import Report, Category
+from .models import Park, Report, Category
 from .forms import ReportForm
 
 
@@ -40,3 +41,7 @@ def get_report(request):
         form = ReportForm
 
     return render(request, 'report.html', {'form': form})
+
+
+class ReportDetailView(generic.DetailView):
+    model = Report
