@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views import generic
 from django.utils import timezone
+from django.contrib.auth.forms import AuthenticationForm
 
 from .models import Park, Report, Category
 from .forms import ReportForm
@@ -10,6 +11,7 @@ from .forms import ReportForm
 def index(request):
     categories = Category.objects.all()
     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
+    login_form = AuthenticationForm
     return render(request, 'search/homepage.html', {'categories': categories, 'latest': latest})
 
 
@@ -24,23 +26,6 @@ def results(request):
         q = ""
         reports = Report.objects.all()
         return render(request, 'search/search_results.html', {'reports': reports, 'query': q})
-
-
-def get_report(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = ReportForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            form.save()
-            # redirect to a new URL:
-            return HttpResponseRedirect('')
-    else:
-        form = ReportForm
-
-    return render(request, 'report.html', {'form': form})
 
 
 class ReportDetailView(generic.DetailView):
