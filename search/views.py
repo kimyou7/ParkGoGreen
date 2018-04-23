@@ -8,6 +8,7 @@ from .forms import ReportForm
 
 def index(request):
     categories = Category.objects.all()
+    latest = Report.objects.filter()
     return render(request, 'search/homepage.html', {'categories': categories})
 
 
