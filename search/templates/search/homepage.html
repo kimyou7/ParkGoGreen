@@ -25,7 +25,7 @@
                             <h4 class="card-title"></h4>
                             <p class="card-text">Subject: {{ report.type }}</p>
                             <p class="card-text">Location: {{ report.park }}</p>
-                            <a href="#" class="btn btn-dark">Read More</a>
+                            <a href="{% url 'search:report_detail' report.pk %}" class="btn btn-dark">Read More</a>
                         </div>
                     </div>
                 </div>
