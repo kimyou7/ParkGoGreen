@@ -134,3 +134,6 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/2.0/topics/files/
 MEDIA_ROOT = os.path.join(ENV_PATH, 'media/')
 MEDIA_URL = 'media/'
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'

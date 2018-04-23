@@ -1,13 +1,18 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.views.generic import DetailView
+from django.http import HttpResponseRedirect
+from django.views import generic
+from django.utils import timezone
+from django.contrib.auth.forms import AuthenticationForm
 
-from .models import Park, Report, Category, Status
+from .models import Park, Report, Category
+from .forms import ReportForm
 
 
 def index(request):
     categories = Category.objects.all()
-    return render(request, 'search/index.html', {'categories': categories})
+    latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
+    login_form = AuthenticationForm
+    return render(request, 'search/homepage.html', {'categories': categories, 'latest': latest})
 
 
 def results(request):
@@ -21,3 +26,7 @@ def results(request):
         q = ""
         reports = Report.objects.all()
         return render(request, 'search/search_results.html', {'reports': reports, 'query': q})
+
+
+class ReportDetailView(generic.DetailView):
+    model = Report

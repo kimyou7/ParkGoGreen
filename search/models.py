@@ -11,7 +11,6 @@ from io import BytesIO
 from django.core.files.base import ContentFile
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
 
 
 class Park(models.Model):
@@ -43,7 +42,7 @@ class Status(models.Model):
 
 
 class Report(models.Model):
-    sub_date = models.DateTimeField('date submitted')
+    sub_date = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=1000)
     image = models.ImageField(upload_to='photos')
     thumbnail = models.ImageField(upload_to='thumbs', editable=False, null=True)

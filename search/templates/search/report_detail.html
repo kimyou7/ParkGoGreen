@@ -1,0 +1,9 @@
+{% extends "search/base_generic.html" %}
+
+{% block content %}
+    <h1>Report</h1>
+
+    <p>Submission date: {{ report.sub_date }}</p>
+    <p>Park: {{ report.park.name }}</p>
+    <p>Issue: {{ report.description }}</p>
+{% endblock %}
