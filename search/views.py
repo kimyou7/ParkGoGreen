@@ -1,15 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import DetailView
+from django.http import HttpResponseRedirect
+from django.utils import timezone
 
-from .models import Park, Report, Category
+from .models import Report, Category
 from .forms import ReportForm
 
 
 def index(request):
     categories = Category.objects.all()
-    latest = Report.objects.filter()
-    return render(request, 'search/homepage.html', {'categories': categories})
+    latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
+    return render(request, 'search/homepage.html', {'categories': categories, 'latest': latest})
 
 
 def results(request):

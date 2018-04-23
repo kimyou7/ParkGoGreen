@@ -11,7 +11,6 @@ from io import BytesIO
 from django.core.files.base import ContentFile
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
 
 
 class Park(models.Model):
