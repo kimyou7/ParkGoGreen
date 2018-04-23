@@ -1,9 +1,41 @@
 {% extends "search/base_generic.html" %}
 
 {% block content %}
-    <h1>Report</h1>
 
-    <p>Submission date: {{ report.sub_date }}</p>
-    <p>Park: {{ report.park.name }}</p>
-    <p>Issue: {{ report.description }}</p>
+
+<div class="container">
+
+    <!-- Portfolio Item Heading -->
+    <h1 class="my-4">Report</h1>
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+        <div class="col-md-8">
+            <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+        </div>
+
+        <div class="col-md-4">
+
+            <h3 class="my-3">Project Details</h3>
+            <ul>
+                <li><p>Park: {{ report.park.name }}</p></li>
+                <li><p>Issue: {{ report.description }}</p></li>
+                <li><p>Submission date: {{ report.sub_date }}</p></li>
+            </ul>
+        </div>
+        <h3 class="my-3">Details</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque
+                urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies,
+                justo eu convallis placerat, felis enim.</p>
+
+    </div>
+    <!-- /.row -->
+
+    <!-- Related Projects Row -->
+
+</div>
+<!-- /.row -->
+
+
 {% endblock %}
