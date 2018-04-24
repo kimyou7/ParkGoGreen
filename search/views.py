@@ -17,6 +17,10 @@ def index(request):
 def results(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
+        if len(q) > 40:
+            latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
+            error = "Please keep search under 40 characters."
+            return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
         t = request.GET['dropdown']
         reports = Report.objects.filter(park__name__icontains=q, type__type__iexact=t)
         similar = Report.objects.filter(type__type__iexact=t)

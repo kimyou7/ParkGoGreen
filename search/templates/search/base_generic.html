@@ -63,6 +63,9 @@
 </head>
 <h1 class="my-4"></h1>
 <center>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
     <form style="padding-bottom: 50px;" action="{% url 'search:results' %}" method="get">
         <select name="dropdown">
             <option value="" selected hidden>Select a category</option>
