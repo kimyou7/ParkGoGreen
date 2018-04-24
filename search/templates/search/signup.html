@@ -1,10 +1,54 @@
 {% extends "search/base_generic.html" %}
 
+<html lang="en">
+<head>
+    <title>Sign Up</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            color: #fff;
+            background: #19aa8d;
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+
+        }
+
+        .container{
+            text-align-all: center;
+        }
+
+    </style>
+
+</head>
+
+<body>
 {% block content %}
-    <h2>Sign up</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign up</button>
-    </form>
+
+    <div class="container">
+        <h3>Sign up</h3>
+        <p>Please fill in this form to create an account!</p>
+        <hr>
+        <div class="form-group">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <div class="form-group">
+                    <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms
+                        of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+                </div>
+                <button type="submit" class="btn btn-success">Sign up</button>
+            </form>
+        </div>
+        <div class="text-center">Already have an account? <a href="{% url 'login' %}">Login here</a></div>
+    </div>
+
 {% endblock %}
+</body>
+</html>
