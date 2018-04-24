@@ -4,15 +4,13 @@ from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm
 
-from .models import Park, Report, Category
-from .forms import ReportForm
+from .models import Report
 
 
 def index(request):
-    categories = Category.objects.all()
     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
     login_form = AuthenticationForm
-    return render(request, 'search/homepage.html', {'categories': categories, 'latest': latest})
+    return render(request, 'search/homepage.html', {'latest': latest})
 
 
 def results(request):

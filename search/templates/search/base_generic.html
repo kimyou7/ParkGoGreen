@@ -64,9 +64,11 @@
     <form style="padding-bottom: 50px;" action="{% url 'search:results' %}" method="get">
         <select name="dropdown">
             <option value="" selected hidden>Select a category</option>
-            {% for category in categories %}
-            <option value={{ category.type }}>{{ category.type }}</option>
-            {% endfor %}
+            <option value="Bathroom">Bathroom</option>
+            <option value="Garbage">Garbage</option>
+            <option value="Medical Waste">Medical Waste</option>
+            <option value="Oil Spill">Oil Spill</option>
+            <option value="Other">Other</option>
         </select>
         <input type="text" name="q" placeholder="Search by park name" autocomplete="off">
         <input type="submit" value="Search" class="btn btn-default">
