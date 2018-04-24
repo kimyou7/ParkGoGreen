@@ -60,6 +60,5 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-# Ignore static files and uploaded media
+# Ignore static files
 csc648-team13/static/*
-csc648-team13/media/*
