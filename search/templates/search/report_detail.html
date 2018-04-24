@@ -1,9 +1,57 @@
 {% extends "search/base_generic.html" %}
 
 {% block content %}
-    <h1>Report</h1>
 
-    <p>Submission date: {{ report.sub_date }}</p>
-    <p>Park: {{ report.park.name }}</p>
-    <p>Issue: {{ report.description }}</p>
+
+<div class="container">
+
+    <!-- Portfolio Item Heading -->
+    <h1 class="my-4">Report</h1>
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+        <div class="col-md-4">
+            <img class="img-fluid" src="../{{ report.thumbnail.url }}" alt="">
+        </div>
+
+        <div class="col-md-8">
+
+            <h3 class="my-6" style="padding-bottom: 20px">Park Information</h3>
+            <ul>
+                <div class="row">
+                    <div class="col">
+                        <li style="padding-right: 100px"><p>Park: {{ report.park.name }}</p></li>
+                        <li style="padding-right: 100px"><p>Submission date: {{ report.sub_date }}</p></li>
+                    </div>
+                    <div class="col">
+                        <li style="padding-right: 100px"><p>Issue: {{ report.description }}</p></li>
+                        <li style="padding-right: 100px"><p>Category: {{ report.type }}</p></li>
+                    </div>
+                </div>
+
+            </ul>
+        </div>
+
+    </div>
+
+    <h3 class="my-3">Details</h3>
+    <p style="padding-bottom: 50px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio,
+        gravida pellentesque
+        urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies,
+        justo eu convallis placerat, felis enim.</p>
+    <!-- /.row -->
+
+    <!-- Related Projects Row -->
+
+</div>
+<!-- /.row -->
+
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
 {% endblock %}
