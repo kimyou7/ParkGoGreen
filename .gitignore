@@ -60,5 +60,6 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-# Collected style
+# Ignore static files and uploaded media
 csc648-team13/static/*
+csc648-team13/media/*
