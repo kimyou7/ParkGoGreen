@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from .models import Report, User
+from .models import Report
 
 
 class ReportForm(ModelForm):
