@@ -19,12 +19,14 @@ def results(request):
         q = request.GET['q']
         t = request.GET['dropdown']
         reports = Report.objects.filter(park__name__icontains=q, type__type__iexact=t)
-        all_reports = Report.objects.all()
-        return render(request, 'search/search_results.html', {'reports': reports, 'query': q, 'all_reports': all_reports})
+        similar = Report.objects.filter(type__type__iexact=t)
+        return render(request, 'search/search_results.html', {'reports': reports, 'query': q, 'similar': similar})
     else:
         q = ""
-        reports = Report.objects.all()
-        return render(request, 'search/search_results.html', {'reports': reports, 'query': q})
+        t = request.GET['dropdown']
+        reports = []
+        similar = Report.objects.filter(type__type__iexact=t)
+        return render(request, 'search/search_results.html', {'reports': reports, 'query': q, 'similar': similar})
 
 
 class ReportDetailView(generic.DetailView):

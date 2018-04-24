@@ -37,7 +37,7 @@
     {% for issue in reports %}
         <div class="row w3-margin-bottom">
             <div class="col-sm-4">
-                <a href="../{{ issue.image.url }}">
+                <a href="{% url 'search:report_detail' issue.pk %}">
                     <img src="../{{ issue.image.url }}" class="img-thumbnail"/></a>
             </div>
             <div class="col-sm-4">
@@ -56,29 +56,34 @@
 
     {% endfor %}
 {% else %}
-
-    <p>No park matches your search criteria, here are all reports.</p>
-    <hr>
-    {% for issue in all_reports %}
-        <div class="row w3-margin-bottom">
-            <div class="col-sm-4">
-                <a href="../{{ issue.thumbnail.url }}">
-                    <img src="../{{ issue.thumbnail.url }}" class="img-thumbnail"/></a>
-            </div>
-            <div class="col-sm-4">
-                <p>Park: {{ issue.park.name }} </p>
-                <p>Date: {{ issue.sub_date }} </p>
-                <p>Issue: {{ issue.description }} </p>
-            </div>
-            <div class="col-sm-4">
-                <iframe width="250" height="200" frameborder="0" style="border:0"
-                        src="{{ issue.park.maps_string }}" allowfullscreen>
-                </iframe>
-            </div>
-        </div>
+    {% if similar %}
+        <p>No park matches your search criteria, here are similar reports.</p>
         <hr>
 
-    {% endfor %}
+        {% for issue in similar %}
+            <div class="row w3-margin-bottom">
+                <div class="col-sm-4">
+                    <a href="{% url 'search:report_detail' issue.pk %}">
+                        <img src="../{{ issue.image.url }}" class="img-thumbnail"/></a>
+                </div>
+                <div class="col-sm-4">
+                    <p>Park: {{ issue.park.name }} </p>
+                    <p>Date: {{ issue.sub_date }} </p>
+                    <p>Issue: {{ issue.description }} </p>
+                </div>
+                <div class="col-sm-4">
+                    <iframe width="250" height="200" frameborder="0" style="border:0"
+                            src="{{ issue.park.maps_string }}" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            <hr>
+
+        {% endfor %}
+    {% else %}
+        <p>Please select a category to search.</p>
+        <hr>
+    {% endif %}
 {% endif %}
 {% endblock %}
 </body>
