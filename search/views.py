@@ -37,14 +37,15 @@ def results(request):
             return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
         t = request.GET['dropdown']
         reports = Report.objects.filter(park__name__icontains=q, type__type__iexact=t)
-        similar = Report.objects.filter(type__type__iexact=t)
-        return render(request, 'search/search_results.html', {'reports': reports, 'query': q, 'similar': similar})
-    else:
+        return render(request, 'search/search_results.html', {'reports': reports, 'query': q, 'is_reports': True})
+    elif request.GET['dropdown']:
         q = ""
         t = request.GET['dropdown']
         reports = []
-        similar = Report.objects.filter(type__type__iexact=t)
-        return render(request, 'search/search_results.html', {'reports': reports, 'query': q, 'similar': similar})
+        reports = Report.objects.filter(type__type__iexact=t)
+        return render(request, 'search/search_results.html', {'reports': reports, 'query': q, 'similar': True})
+    else:
+        return render(request, 'search/search_results.html', {'query': False})
 
 
 # Detailed report view in class form. Extends Django's generic DetailView.
