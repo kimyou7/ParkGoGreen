@@ -26,9 +26,9 @@
     {% block query %}{% if query %}{{query}}{% endif %}{% endblock %}
     {% block category %}
     {% if cat == False %}
-        <option value="" selected hidden>Any</option>
+        <option value="" selected hidden>All</option>
     {% else %}
-        <option value="">Any</option>
+        <option value="">All</option>
         <option value="{{cat}}" selected hidden>{{cat}}</option>
     {% endif %}
     {% for category in categories %}
