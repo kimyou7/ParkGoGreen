@@ -23,7 +23,7 @@ from .forms import PostForm
 # Homepage view. Retrieves 5 latest reports based on their submission date, loads homepage.html
 def index(request):
     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
-    login_form = AuthenticationForm
+    # login_form = AuthenticationForm
     return render(request, 'search/homepage.html', {'latest': latest})
 
 
@@ -34,25 +34,29 @@ def results(request):
     category = request.GET['dropdown']
 
     # Query search
-    if 'q' in request.GET and request.GET['q']:
-        q = request.GET['q']
-        if len(q) > 40:
+    if request.GET['q']:
+        query = request.GET['q']
+        if len(query) > 20:
             latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
-            error = "Please keep search under 40 characters."
+            error = "Please keep search under 20 characters."
             return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
         if request.GET['dropdown'] == "":
-            reports =Report.objects.filter(park__name__icontains=q)
+            reports = Report.objects.filter(park__name__icontains = query)
+            if not reports:
+                reports = Report.objects.all()
             return render(request, 'search/search_results.html', {
-                'reports': reports, 'query': q, 'categories': categories, 'cat': False, 'is_reports': True})
+                'reports': reports, 'query': query, 'categories': categories, 'cat': False, 'is_reports': True})
         else:
-            reports =Report.objects.filter(park__name__icontains=q, type__type__iexact=category)
+            reports = Report.objects.filter(park__name__icontains = query, type__type__iexact = category)
+            if not reports:
+                reports = Report.objects.filter(type__type__iexact = category)
             return render(request, 'search/search_results.html', {
-                'reports': reports, 'query': q, 'categories': categories.exclude(type__iexact=category), 'cat': category, 'is_reports': True})
+                'reports': reports, 'query': query, 'categories': categories.exclude(type__iexact = category), 'cat': category, 'is_reports': True})
     
     # Category search
     elif request.GET['dropdown']:
-        reports = Report.objects.filter(type__type__iexact=category)
-        return render(request, 'search/search_results.html', {'reports': reports,  'query': False, 'categories': categories.exclude(type__iexact=category), 'cat': category, 'similar': True})
+        reports = Report.objects.filter(type__type__iexact = category)
+        return render(request, 'search/search_results.html', {'reports': reports,  'query': False, 'categories': categories.exclude(type__iexact = category), 'cat': category, 'similar': True})
     
     # Empty search
     else:
