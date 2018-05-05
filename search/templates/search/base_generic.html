@@ -68,14 +68,15 @@
     {% endif %}
     <form style="padding-bottom: 50px;" action="{% url 'search:results' %}" method="get">
         <select name="dropdown">
-            <option value="" selected hidden>Select a category</option>
+            {% block category %}{% endblock %}
+            <option value="" selected hidden>{% block dropdown %}Any{% endblock %}</option>
             <option value="Bathroom">Bathroom</option>
             <option value="Garbage">Garbage</option>
             <option value="Medical Waste">Medical Waste</option>
             <option value="Oil Spill">Oil Spill</option>
             <option value="Other">Other</option>
         </select>
-        <input type="text" name="q" placeholder="Search by park name" autocomplete="off">
+        <input type="text" name="q" placeholder="Search by park name" autocomplete="off" value="{% block query %}{% endblock %}">
         <input type="submit" value="Search" class="btn btn-default">
     </form>
 </center>
