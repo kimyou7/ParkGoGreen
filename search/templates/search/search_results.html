@@ -23,15 +23,19 @@
 <br>
 
 <p hidden>
-    {% block dropdown %}{{dropdown}}{% endblock %}
-    {% block query %}{{query}}{% endblock %}
-</p>
-
-{% block category %}
+    {% block query %}{% if query %}{{query}}{% endif %}{% endblock %}
+    {% block category %}
+    {% if cat == False %}
+        <option value="" selected hidden>Any</option>
+    {% else %}
+        <option value="">Any</option>
+        <option value="{{cat}}" selected hidden>{{cat}}</option>
+    {% endif %}
     {% for category in categories %}
-        <option value="{{category}}" selected="selected" {% endif %}>
+        <option value="{{category}}">{{category}}</option>
     {% endfor %}
 {% endblock %}
+</p>
 
 {% if query %}
     <p>You searched for: <strong>{{ query }}</strong></p>

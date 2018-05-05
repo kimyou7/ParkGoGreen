@@ -16,6 +16,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.urls import reverse_lazy
 
 from .models import Report
+from .models import Category
 from .forms import PostForm
 
 
@@ -29,22 +30,34 @@ def index(request):
 # Search results view. Called by the form in base_generic.html Takes the category and type, uses them to filter results
 # from the database, then returns them to search_results.html.
 def results(request):
+    categories = Category.objects.all()
+    category = request.GET['dropdown']
+
+    # Query search
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
         if len(q) > 40:
             latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
             error = "Please keep search under 40 characters."
             return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
-        t = request.GET['dropdown']
-        reports = Report.objects.filter(park__name__icontains=q, type__type__iexact=t)
-        return render(request, 'search/search_results.html', {'reports': reports, 'dropdown': t, 'query': q, 'is_reports': True})
+        if request.GET['dropdown'] == "":
+            reports =Report.objects.filter(park__name__icontains=q)
+            return render(request, 'search/search_results.html', {
+                'reports': reports, 'query': q, 'categories': categories, 'cat': False, 'is_reports': True})
+        else:
+            reports =Report.objects.filter(park__name__icontains=q, type__type__iexact=category)
+            return render(request, 'search/search_results.html', {
+                'reports': reports, 'query': q, 'categories': categories.exclude(type__iexact=category), 'cat': category, 'is_reports': True})
+    
+    # Category search
     elif request.GET['dropdown']:
-        t = request.GET['dropdown']
-        reports = Report.objects.filter(type__type__iexact=t)
-        return render(request, 'search/search_results.html', {'reports': reports, 'dropdown': t, 'query': False, 'similar': True})
+        reports = Report.objects.filter(type__type__iexact=category)
+        return render(request, 'search/search_results.html', {'reports': reports,  'query': False, 'categories': categories.exclude(type__iexact=category), 'cat': category, 'similar': True})
+    
+    # Empty search
     else:
         reports = Report.objects.all()
-        return render(request, 'search/search_results.html', {'reports': reports, 'dropdown': 'Any', 'query': False, 'categories': categories})
+        return render(request, 'search/search_results.html', {'reports': reports, 'query': False, 'categories': categories, 'cat': False})
 
 
 # Detailed report view in class form. Extends Django's generic DetailView.
