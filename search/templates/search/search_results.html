@@ -10,7 +10,7 @@
         <p>We have found <strong style="color: darkcyan">{{ reports|length }} park{{ reports|pluralize }}</strong> from
             your search.</p>
     {% elif similar %}
-        <p>No park matches your search criteria, here are similar reports.</p>
+        <p>No park matches your search criteria, here are similar reports.</p><hr>
     {% else %}
         <p>Please select a category to search.</p>
     {% endif %}
@@ -25,15 +25,16 @@
                     <img src="../{{ issue.thumbnail.url }}" class="img-thumbnail"/></a>
             </div>
             <div class="col-sm-4">
-                <h5 class="my-6">Park Information</h5>
+                <h3 class="my-6">Park Information</h3>
                 <br>
                 <p>Park: <strong>{{ issue.park.name }}</strong></p>
                 <p>Date: <strong>{{ issue.sub_date }}</strong></p>
+                <p>Category: <strong>{{ issue.type }}</strong></p>
                 <p>Issue: <strong>{{ issue.description }}</strong></p>
             </div>
 
             <div class="col-sm-4">
-                <iframe width="250" height="200" frameborder="0" style="border:0"
+                <iframe width="310" height="220" frameborder="0" style="border:0"
                         src="{{ issue.park.maps_string }}" allowfullscreen>
                 </iframe>
             </div>
