@@ -77,7 +77,7 @@ class Report(models.Model):
     # https://stackoverflow.com/questions/23922289/django-pil-save-thumbnail-version-right-when-image-is-uploaded
     def make_thumbnail(self):
         photo = Image.open(self.image)
-        photo.thumbnail((200, 200), Image.ANTIALIAS)
+        photo.thumbnail((250, 250), Image.ANTIALIAS)
 
         thumb_name, thumb_extension = os.path.splitext(self.image.name)
         thumb_extension = thumb_extension.lower()
