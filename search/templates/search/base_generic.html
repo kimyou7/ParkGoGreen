@@ -7,6 +7,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'search/style.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'search/bootstrap.min.css' %}"/>
 
+
+
 <!--<link rel="stylesheet" type="text/css" href="{% static 'search/modern-business.css' %}" />-->
 <a href="{% url 'search:index' %}"><img src="{% static "search/Park Go Green.png" %}" style="float: left"/></a>
 <div class="container">
@@ -61,21 +63,53 @@
 
 
 </head>
-<h1 class="my-4"></h1>
-<center>
-    <form style="padding-bottom: 50px;" action="{% url 'search:results' %}" method="get">
-        <select name="dropdown">
-            <option value="" selected hidden>Select a category</option>
-            <option value="Bathroom">Bathroom</option>
-            <option value="Garbage">Garbage</option>
-            <option value="Medical Waste">Medical Waste</option>
-            <option value="Oil Spill">Oil Spill</option>
-            <option value="Other">Other</option>
-        </select>
-        <input type="text" name="q" placeholder="Search by park name" autocomplete="off">
-        <input type="submit" value="Search" class="btn btn-default">
-    </form>
-</center>
+
+<!-- Old search bar code-->
+
+<!--<h1 class="my-4"></h1>-->
+<!--<center>-->
+    <!--<form style="padding-bottom: 50px;" action="{% url 'search:results' %}" method="get">-->
+        <!--<select name="dropdown">-->
+            <!--<option value="" selected hidden>Select a category</option>-->
+            <!--<option value="Bathroom">Bathroom</option>-->
+            <!--<option value="Garbage">Garbage</option>-->
+            <!--<option value="Medical Waste">Medical Waste</option>-->
+            <!--<option value="Oil Spill">Oil Spill</option>-->
+            <!--<option value="Other">Other</option>-->
+        <!--</select>-->
+        <!--<input type="text" name="q" placeholder="Search by park name" autocomplete="off">-->
+        <!--<input type="submit" value="Search" class="btn btn-default">-->
+    <!--</form>-->
+<!--</center>-->
+
+<div class="container">
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <form action="{% url 'search:results' %}" method="get" id="searchForm" class="input-group" style="padding: 50px;">
+
+                    <div class="input-group-btn">
+                        <select name="dropdown" id="search_param" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown">
+                             <option value="" selected hidden>Select a category</option>
+                            <option value="Bathroom">Bathroom</option>
+                            <option value="Garbage">Garbage</option>
+                            <option value="Medical Waste">Medical Waste</option>
+                            <option value="Oil Spill">Oil Spill</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <input type="text" class="form-control" name="x" placeholder="Search term...">
+                    <span class="input-group-btn">
+                            <input type="submit" value="Search" class="btn btn-default">
+                           <span class="glyphicon glyphicon-search"></span>
+
+                    </span>
+                </form><!-- end form -->
+            </div><!-- end col-xs-8 -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+
+
+<div></div>
 
 <center style="padding-bottom: 10px"> Our website is dedicated to solving any and all environmental issues in your local
     parks!
