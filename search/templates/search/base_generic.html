@@ -83,15 +83,17 @@
 
             <form class="form-row" style="padding-bottom: 50px;" action="{% url 'search:results' %}" method="get">
                 <select name="dropdown">
-                    <option value="" selected hidden>Search by category</option>
+                    {% block category %}
+                    <option value="All" selected>All</option>
                     <option value="Bathroom">Bathroom</option>
                     <option value="Garbage">Garbage</option>
                     <option value="Medical Waste">Medical Waste</option>
                     <option value="Oil Spill">Oil Spill</option>
                     <option value="Other">Other</option>
+                    {% endblock %}
                 </select>
                 <input type="text" name="q" style="padding: 0px 10px 0px " placeholder="City, Park, ZIP"
-                       autocomplete="off">
+                       autocomplete="off" value="{% block query %}{% endblock %}">
                 <div class="input-group-btn">
                     <button type="submit" class="btn btn-success">Search</button>
                 </div>
