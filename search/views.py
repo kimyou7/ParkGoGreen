@@ -35,6 +35,7 @@ def results(request):
     # Query search
     if request.GET['q']:
         query = request.GET['q']
+        query = query.strip()
 
         # Input validation
         if not all(x.isalnum() or x.isspace() for x in query):
