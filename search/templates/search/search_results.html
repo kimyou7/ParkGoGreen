@@ -1,34 +1,19 @@
 {% extends "search/base_generic.html" %}
 
 {% block content %}
-
-<br>
-
-<p hidden>
-    {% block query %}{% if query %}{{query}}{% endif %}{% endblock %}
-    {% block category %}
-    {% if cat == False %}
-        <option value="" selected hidden>All</option>
-    {% else %}
-        <option value="">All</option>
-        <option value="{{cat}}" selected hidden>{{cat}}</option>
+    <br>
+    <div class="container">
+    {% if query %}
+        <p>You searched for: <strong>{{ query }}</strong></p>
     {% endif %}
-    {% for category in categories %}
-        <option value="{{category}}">{{category}}</option>
-    {% endfor %}
-{% endblock %}
-</p>
-
-{% if query %}
-    <p>You searched for: <strong>{{ query }}</strong></p>
-{% endif %}
-{% if is_reports %}
-    <p>We have found <strong style="color: darkcyan">{{ reports|length }} park{{ reports|pluralize }}</strong> from your search.</p>
-{% elif similar %}
-    <p>No park matches your search criteria, here are similar reports.</p>
-{% else %}
-    <p>Please select a category to search.</p>
-{% endif %}
+    {% if is_reports %}
+        <p>We have found <strong style="color: darkcyan">{{ reports|length }} park{{ reports|pluralize }}</strong> from
+            your search.</p>
+    {% elif similar %}
+        <p>No park matches your search criteria, here are similar reports.</p><hr>
+    {% else %}
+        <p>Please select a category to search.</p>
+    {% endif %}
     <hr>
 
     <!-- display Park info if search are found -->
@@ -58,4 +43,9 @@
     {% endfor %}
     </div>
 
+
 {% endblock %}
+
+
+
+

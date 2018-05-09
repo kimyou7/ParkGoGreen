@@ -16,56 +16,36 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.urls import reverse_lazy
 
 from .models import Report
-from .models import Category
 from .forms import PostForm
 
 
 # Homepage view. Retrieves 5 latest reports based on their submission date, loads homepage.html
 def index(request):
     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
-    # login_form = AuthenticationForm
+    login_form = AuthenticationForm
     return render(request, 'search/homepage.html', {'latest': latest})
 
 
 # Search results view. Called by the form in base_generic.html Takes the category and type, uses them to filter results
 # from the database, then returns them to search_results.html.
 def results(request):
-    categories = Category.objects.all()
-    category = request.GET['dropdown']
-
-    # Query search
-    if request.GET['q']:
-        query = request.GET['q']
-        if len(query) > 40:
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        if len(q) > 40:
             latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
             error = "Please keep search under 40 characters."
             return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
-        elif int(query) < 0:
-            latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
-            error = "Please enter a non-negative number"
-            return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
-        if request.GET['dropdown'] == "":
-            reports = Report.objects.filter(park__name__icontains = query)
-            if not reports:
-                reports = Report.objects.all()
-            return render(request, 'search/search_results.html', {
-                'reports': reports, 'query': query, 'categories': categories, 'cat': False, 'is_reports': True})
-        else:
-            reports = Report.objects.filter(park__name__icontains = query, type__type__iexact = category)
-            if not reports:
-                reports = Report.objects.filter(type__type__iexact = category)
-            return render(request, 'search/search_results.html', {
-                'reports': reports, 'query': query, 'categories': categories.exclude(type__iexact = category), 'cat': category, 'is_reports': True})
-    
-    # Category search
+        t = request.GET['dropdown']
+        reports = Report.objects.filter(park__name__icontains=q, type__type__iexact=t)
+        return render(request, 'search/search_results.html', {'reports': reports, 'query': q, 'is_reports': True})
     elif request.GET['dropdown']:
-        reports = Report.objects.filter(type__type__iexact = category)
-        return render(request, 'search/search_results.html', {'reports': reports,  'query': False, 'categories': categories.exclude(type__iexact = category), 'cat': category, 'similar': True})
-    
-    # Empty search
+        q = ""
+        t = request.GET['dropdown']
+        reports = []
+        reports = Report.objects.filter(type__type__iexact=t)
+        return render(request, 'search/search_results.html', {'reports': reports, 'query': q, 'similar': True})
     else:
-        reports = Report.objects.all()
-        return render(request, 'search/search_results.html', {'reports': reports, 'query': False, 'categories': categories, 'cat': False})
+        return render(request, 'search/search_results.html', {'query': False})
 
 
 # Detailed report view in class form. Extends Django's generic DetailView.
