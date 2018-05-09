@@ -64,7 +64,8 @@
     <!-- Header template for every pages -->
     <div class="container-fluid">
         <div class="">
-            <a href="{% url 'search:index' %}"><img src="{% static "search/Park Report.png" %}" style="float: left"/></a>
+            <a href="{% url 'search:index' %}"><img src="{% static "search/Park Report.png" %}"
+                                                    style="float: left"/></a>
         </div>
 
         <div class="row" style="float: right">
@@ -92,7 +93,9 @@
                 </select>
                 <input type="text" name="q" style="padding: 0px 10px 0px " placeholder="City, Park, ZIP"
                        autocomplete="off">
-                <button type="submit" class="btn btn-success">Search</button>
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-success">Search</button>
+                </div>
             </form>
 
         </center>
