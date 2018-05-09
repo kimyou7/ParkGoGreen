@@ -40,6 +40,10 @@ def results(request):
             latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
             error = "Please keep search under 40 characters."
             return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
+        elif int(query) < 0:
+            latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
+            error = "Please enter a non-negative number"
+            return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
         if request.GET['dropdown'] == "":
             reports = Report.objects.filter(park__name__icontains = query)
             if not reports:
