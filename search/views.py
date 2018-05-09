@@ -36,9 +36,9 @@ def results(request):
     # Query search
     if request.GET['q']:
         query = request.GET['q']
-        if len(query) > 20:
+        if len(query) > 40:
             latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
-            error = "Please keep search under 20 characters."
+            error = "Please keep search under 40 characters."
             return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
         if request.GET['dropdown'] == "":
             reports = Report.objects.filter(park__name__icontains = query)
