@@ -52,10 +52,11 @@ def results(request):
             reports = Report.objects.filter(park__name__icontains=query) | Report.objects.filter(
                 park__address__icontains=query)
             if not reports:
-                if len(query) > 5:
+                if len(query) > 5 and query.isdigit():
                     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
                     error = "Not a valid zip code"
                     return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
+                reports = Report.objects.filter(type__type__iexact=category)
             return render(request, 'search/search_results.html', {
                 'reports': reports, 'query': query, 'categories': categories, 'cat': category, 'is_reports': True})
 
@@ -65,7 +66,7 @@ def results(request):
                                             type__type__iexact=category) | Report.objects.filter(
                 park__address__icontains=query, type__type__iexact=category)
             if not reports:
-                if len(query) > 5:
+                if len(query) > 5 and query.isdigit():
                     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
                     error = "Not a valid zip code"
                     return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
