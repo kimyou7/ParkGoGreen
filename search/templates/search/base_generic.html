@@ -106,32 +106,6 @@
 
 </head>
 
-<h1 class="my-4"></h1>
-<center>
-    {% if error %}
-        <p>{{ error }}</p>
-    {% endif %}
-    <form style="padding-bottom: 50px;" action="{% url 'search:results' %}" method="get">
-        <select name="dropdown">
-            {% block category %}            
-            <option value="" selected hidden>All</option>
-            <option value="Bathroom">Bathroom</option>
-            <option value="Garbage">Garbage</option>
-            <option value="Medical Waste">Medical Waste</option>
-            <option value="Oil Spill">Oil Spill</option>
-            <option value="Other">Other</option>
-            {% endblock %}
-        </select>
-        <input type="text" name="q" placeholder="Search by park name" autocomplete="off" value="{% block query %}{% endblock %}">
-        <input type="submit" value="Search" class="btn btn-default">
-    </form>
-</center>
-
-<center style="padding-bottom: 10px"> Our website is dedicated to solving any and all environmental issues in your local
-    parks!
-</center>
-
-
 <body>
 
 <!-- Navigation bar-->
