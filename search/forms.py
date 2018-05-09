@@ -9,7 +9,7 @@ Created by Damico Shields according to Django format
 """
 from django.forms import ModelForm
 
-from .models import Report
+from .models import Report, Category
 
 
 # ModelForm for the Report model, to be used when posting new reports.
@@ -18,3 +18,8 @@ class PostForm(ModelForm):
     class Meta:
         model = Report # Which model the form should use
         fields = ['description', 'image', 'type', 'park'] # List of the fields from the model you want the form to use
+
+    # Excludes All from the post drop down menu
+    def __init__(self, *args, **kwargs):
+        super(PostForm, self).__init__(*args, **kwargs)
+        self.fields['type'].queryset = Category.objects.exclude(type="All")
