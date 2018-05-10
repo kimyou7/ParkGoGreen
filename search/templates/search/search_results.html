@@ -2,6 +2,17 @@
 
 {% block content %}
     <br>
+
+    <p hidden>
+        {% block query %}{% if query %}{{query}}{% endif %}{% endblock %}
+        {% block category %}
+            <option value="{{cat}}" selected>{{cat}}</option>
+            {% for category in categories %}
+                <option value="{{category}}">{{category}}</option>
+            {% endfor %}
+        {% endblock %}
+    </p>
+
     <div class="container">
     {% if query %}
         <p>You searched for: <strong>{{ query }}</strong></p>
@@ -9,10 +20,8 @@
     {% if is_reports %}
         <p>We have found <strong style="color: darkcyan">{{ reports|length }} park{{ reports|pluralize }}</strong> from
             your search.</p>
-    {% elif similar %}
-        <p>No park matches your search criteria, here are similar reports.</p><hr>
     {% else %}
-        <p>Please select a category to search.</p>
+        <p>No park matches your search criteria, here are reports that share a category.</p><hr>
     {% endif %}
     <hr>
 

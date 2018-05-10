@@ -15,7 +15,7 @@ from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.urls import reverse_lazy
 
-from .models import Report
+from .models import Report, Category
 from .forms import PostForm
 
 
@@ -29,23 +29,64 @@ def index(request):
 # Search results view. Called by the form in base_generic.html Takes the category and type, uses them to filter results
 # from the database, then returns them to search_results.html.
 def results(request):
-    if 'q' in request.GET and request.GET['q']:
-        q = request.GET['q']
-        if len(q) > 40:
+    categories = Category.objects.all()
+    category = request.GET['dropdown']
+
+    # Query search
+    if request.GET['q']:
+        query = request.GET['q']
+        query = query.strip()
+
+        # Input validation
+        if not all(x.isalnum() or x.isspace() for x in query):
             latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
-            error = "Please keep search under 40 characters."
+            error = "Please enter alphanumeric characters only. Search either by zip code, park name or city name."
             return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
-        t = request.GET['dropdown']
-        reports = Report.objects.filter(park__name__icontains=q, type__type__iexact=t)
-        return render(request, 'search/search_results.html', {'reports': reports, 'query': q, 'is_reports': True})
-    elif request.GET['dropdown']:
-        q = ""
-        t = request.GET['dropdown']
-        reports = []
-        reports = Report.objects.filter(type__type__iexact=t)
-        return render(request, 'search/search_results.html', {'reports': reports, 'query': q, 'similar': True})
+        if len(query) > 40:
+            latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
+            error = "Please keep search under 40 characters. Search either by zip code, park name or city name"
+            return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
+
+        # Category set to All
+        if category == 'All':
+            reports = Report.objects.filter(park__name__icontains=query) | Report.objects.filter(
+                park__address__icontains=query)
+            if not reports:
+                if len(query) > 5 and query.isdigit():
+                    latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
+                    error = "Not a valid zip code"
+                    return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
+                reports = Report.objects.filter(type__type__iexact=category)
+            return render(request, 'search/search_results.html', {
+                'reports': reports, 'query': query, 'categories': categories, 'cat': category, 'is_reports': True})
+
+        # Category specified
+        else:
+            reports = Report.objects.filter(park__name__icontains=query,
+                                            type__type__iexact=category) | Report.objects.filter(
+                park__address__icontains=query, type__type__iexact=category)
+            if not reports:
+                if len(query) > 5 and query.isdigit():
+                    latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
+                    error = "Not a valid zip code"
+                    return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
+                reports = Report.objects.filter(type__type__iexact=category)
+            return render(request, 'search/search_results.html', {
+                'reports': reports, 'query': query, 'categories': categories.exclude(type__iexact=category),
+                'cat': category, 'is_reports': True})
+
+    # Category search
     else:
-        return render(request, 'search/search_results.html', {'query': False})
+        if category == 'All':
+            reports = Report.objects.all()
+            return render(request, 'search/search_results.html',
+                          {'reports': reports, 'query': False, 'categories': categories.exclude(type__iexact=category),
+                           'cat': category})
+        else:
+            reports = Report.objects.filter(type__type__iexact=category)
+            return render(request, 'search/search_results.html',
+                          {'reports': reports, 'query': False, 'categories': categories.exclude(type__iexact=category),
+                           'cat': category})
 
 
 # Detailed report view in class form. Extends Django's generic DetailView.
