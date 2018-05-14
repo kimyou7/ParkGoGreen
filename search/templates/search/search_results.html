@@ -1,90 +1,51 @@
 {% extends "search/base_generic.html" %}
 
-<html lang="en">
-<head>
-    <title>Park Search</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <style>
-        body {
-            margin-left: 80px;
-            margin-right: 80px;
-        }
-
-        hr {
-            color: aqua;
-        }
-    </style>
-
-</head>
-<body>
 {% block content %}
-{% if query != "" %}
     <br>
-    <p>You searched for: <strong>{{ query }}</strong></p>
-{% endif %}
-{% if reports %}
-    <br>
-    <p>We have found <strong style="color: darkcyan">{{ reports|length }} park{{ reports|pluralize }}</strong> from your
-        search.</p>
+    <div class="container">
+    {% if query %}
+        <p>You searched for: <strong>{{ query }}</strong></p>
+    {% endif %}
+    {% if is_reports %}
+        <p>We have found <strong style="color: darkcyan">{{ reports|length }} park{{ reports|pluralize }}</strong> from
+            your search.</p>
+    {% elif similar %}
+        <p>No park matches your search criteria, here are similar reports.</p><hr>
+    {% else %}
+        <p>Please select a category to search.</p>
+    {% endif %}
     <hr>
 
+    <!-- display Park info if search are found -->
+
     {% for issue in reports %}
-        <div class="row w3-margin-bottom">
-            <div class="col-sm-4">
-                <a href="{% url 'search:report_detail' issue.pk %}">
-                    <img src="../{{ issue.image.url }}" class="img-thumbnail"/></a>
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="{% url 'search:report_detail' issue.pk %}" target="_blank">
+                    <img src="../{{ issue.thumbnail.url }}" class="img-thumbnail"/></a>
             </div>
             <div class="col-sm-4">
-                <p>Park: {{ issue.park.name }} </p>
-                <p>Date: {{ issue.sub_date }} </p>
-                <p>Issue: {{ issue.description }} </p>
+                <h3 class="my-6">Park Information</h3>
+                <br>
+                <p>Park: <strong>{{ issue.park.name }}</strong></p>
+                <p>Date: <strong>{{ issue.sub_date }}</strong></p>
+                <p>Category: <strong>{{ issue.type }}</strong></p>
+                <p>Issue: <strong>{{ issue.description }}</strong></p>
             </div>
 
             <div class="col-sm-4">
-                <iframe width="250" height="200" frameborder="0" style="border:0"
+                <iframe width="310" height="220" frameborder="0" style="border:0"
                         src="{{ issue.park.maps_string }}" allowfullscreen>
                 </iframe>
             </div>
         </div>
-        <hr style="">
-
+        <hr>
     {% endfor %}
-{% else %}
-    {% if similar %}
-        <p>No park matches your search criteria, here are similar reports.</p>
-        <hr>
+    </div>
 
-        {% for issue in similar %}
-            <div class="row w3-margin-bottom">
-                <div class="col-sm-4">
-                    <a href="{% url 'search:report_detail' issue.pk %}">
-                        <img src="../{{ issue.image.url }}" class="img-thumbnail"/></a>
-                </div>
-                <div class="col-sm-4">
-                    <p>Park: {{ issue.park.name }} </p>
-                    <p>Date: {{ issue.sub_date }} </p>
-                    <p>Issue: {{ issue.description }} </p>
-                </div>
-                <div class="col-sm-4">
-                    <iframe width="250" height="200" frameborder="0" style="border:0"
-                            src="{{ issue.park.maps_string }}" allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
-            <hr>
 
-        {% endfor %}
-    {% else %}
-        <p>Please select a category to search.</p>
-        <hr>
-    {% endif %}
-{% endif %}
 {% endblock %}
-</body>
-</html>
+
+
+
+
