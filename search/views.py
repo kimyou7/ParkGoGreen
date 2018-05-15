@@ -8,7 +8,7 @@ is a dictionary that is passed to the template, which can be referenced by key i
 
 Created by Damico Shields according to Django Format.
 """
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.views import generic
 from django.utils import timezone
@@ -102,9 +102,16 @@ class SignUp(generic.CreateView):
     template_name = 'search/signup.html'
 
 
-# Report posting view extending CreateView and using the PostForm created by us. On a succesful posting redirects to the
-# homepage. Loads post_report.html
-class PostReport(generic.CreateView):
-    form_class = PostForm
-    success_url = reverse_lazy('search:index')
-    template_name = 'search/post_report.html'
+# Posts new report. On success, redirects to the new individual report page. On failure, reloads with saved info.
+def post_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.sub_date = timezone.now()
+            post.save()
+            return redirect('search:report_detail', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'search/post_report.html', {'form': form})

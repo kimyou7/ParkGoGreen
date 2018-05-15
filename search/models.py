@@ -55,10 +55,10 @@ class Status(models.Model):
 class Report(models.Model):
     sub_date = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=1000)
-    image = models.ImageField(upload_to='photos')
+    image = models.ImageField(upload_to='photos', null=True, blank=True)
     thumbnail = models.ImageField(upload_to='thumbs', editable=False, null=True)
     type = models.ForeignKey(Category, on_delete=models.CASCADE)
-    status = models.ForeignKey(Status, on_delete=models.CASCADE)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE, default=1)
     park = models.ForeignKey(Park, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 

@@ -7,6 +7,7 @@ forms.Form or the ModelForm, which builds a form based on an existing model.
 
 Created by Damico Shields according to Django format
 """
+
 from django.forms import ModelForm
 
 from .models import Report, Category
@@ -17,9 +18,10 @@ class PostForm(ModelForm):
 
     class Meta:
         model = Report # Which model the form should use
-        fields = ['description', 'image', 'type', 'park'] # List of the fields from the model you want the form to use
+        fields = ['park', 'type', 'image', 'description'] # List of the fields from the model you want the form to use
 
     # Excludes All from the post drop down menu
     def __init__(self, *args, **kwargs):
         super(PostForm, self).__init__(*args, **kwargs)
         self.fields['type'].queryset = Category.objects.exclude(type="All")
+        self.fields['image'].required = False
