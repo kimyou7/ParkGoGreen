@@ -104,7 +104,7 @@ class SignUp(generic.CreateView):
 
 # Posts new report. On success, redirects to the new individual report page. On failure, reloads with saved info.
 def post_new(request):
-    if request.method == "POST":
+    if request.method == "POST" and request.user.is_authenticated:
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
