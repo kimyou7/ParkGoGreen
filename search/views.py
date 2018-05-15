@@ -9,14 +9,14 @@ is a dictionary that is passed to the template, which can be referenced by key i
 Created by Damico Shields according to Django Format.
 """
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.contrib.auth import login, authenticate
 from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.urls import reverse_lazy
 
 from .models import Report, Category
-from .forms import PostForm
+from .forms import PostForm, SignUpForm
 
 
 # Homepage view. Retrieves 5 latest reports based on their submission date, loads homepage.html
@@ -94,12 +94,20 @@ class ReportDetailView(generic.DetailView):
     model = Report
 
 
-# Registration view extending the Django generic CreateView and using the Django UserCreationForm. On success, redirects
-# to the success_url. Loads the signup.html
-class SignUp(generic.CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'search/signup.html'
+# Registration with required remail field and optional name fields.
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = SignUpForm()
+    return render(request, 'search/signup.html', {'form': form})
 
 
 # Posts new report. On success, redirects to the new individual report page. On failure, reloads with saved info.
