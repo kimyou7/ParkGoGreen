@@ -25,7 +25,7 @@ class PostForm(ModelForm):
     # Excludes All from the post drop down menu
     def __init__(self, *args, **kwargs):
         super(PostForm, self).__init__(*args, **kwargs)
-        self.fields['type'].queryset = Category.objects.exclude(type="All")
+        self.fields['type'].queryset = Category.objects.exclude(type="All Categories")
         self.fields['image'].required = False
 
 

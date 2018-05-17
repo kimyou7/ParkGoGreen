@@ -48,7 +48,7 @@ def results(request):
             return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
 
         # Category set to All
-        if category == 'All':
+        if category == 'All Categories':
             reports = Report.objects.filter(park__name__icontains=query) | Report.objects.filter(
                 park__zip_code__iexact=query)
             if not reports:
