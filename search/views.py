@@ -8,15 +8,15 @@ is a dictionary that is passed to the template, which can be referenced by key i
 
 Created by Damico Shields according to Django Format.
 """
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
 from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.urls import reverse_lazy
 
 from .models import Report, Category
-from .forms import PostForm
+from .forms import PostForm, SignUpForm
 
 
 # Homepage view. Retrieves 5 latest reports based on their submission date, loads homepage.html
@@ -50,7 +50,7 @@ def results(request):
         # Category set to All
         if category == 'All':
             reports = Report.objects.filter(park__name__icontains=query) | Report.objects.filter(
-                park__address__icontains=query)
+                park__zip_code__iexact=query)
             if not reports:
                 if len(query) > 5 and query.isdigit():
                     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
@@ -64,7 +64,7 @@ def results(request):
         else:
             reports = Report.objects.filter(park__name__icontains=query,
                                             type__type__iexact=category) | Report.objects.filter(
-                park__address__icontains=query, type__type__iexact=category)
+                park__zip_code__iexact=query, type__type__iexact=category)
             if not reports:
                 if len(query) > 5 and query.isdigit():
                     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
@@ -94,17 +94,33 @@ class ReportDetailView(generic.DetailView):
     model = Report
 
 
-# Registration view extending the Django generic CreateView and using the Django UserCreationForm. On success, redirects
-# to the success_url. Loads the signup.html
-class SignUp(generic.CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'search/signup.html'
+# Registration with required remail field and optional name fields.
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = SignUpForm()
+    return render(request, 'search/signup.html', {'form': form})
 
 
-# Report posting view extending CreateView and using the PostForm created by us. On a succesful posting redirects to the
-# homepage. Loads post_report.html
-class PostReport(generic.CreateView):
-    form_class = PostForm
-    success_url = reverse_lazy('search:index')
-    template_name = 'search/post_report.html'
+# Posts new report. On success, redirects to the new individual report page. On failure, reloads with saved info.
+def post_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+        # request.session['new_report'] = form
+        if form.is_valid() and request.user.is_authenticated:
+            post = form.save(commit=False)
+            post.user = request.user
+            post.sub_date = timezone.now()
+            post.save()
+            return redirect('search:report_detail', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'search/post_report.html', {'form': form})
