@@ -59,7 +59,9 @@ def results(request):
                     return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
                 reports = Report.objects.all()
             return render(request, 'search/search_results.html', {
-                'reports': reports, 'query': query, 'categories': categories, 'cat': category, 'is_reports': True})
+                          'reports': reports, 'query': query, 
+                          'categories': categories, 
+                          'cat': category, 'is_reports': True})
 
         # Category specified
         else:
@@ -74,8 +76,9 @@ def results(request):
                     return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
                 reports = Report.objects.filter(type__type__iexact=category)
             return render(request, 'search/search_results.html', {
-                'reports': reports, 'query': query, 'categories': categories.exclude(type__iexact=category),
-                'cat': category, 'is_reports': True})
+                          'reports': reports, 'query': query, 
+                          'categories': categories.exclude(type__iexact=category),
+                          'cat': category, 'is_reports': True})
 
     # Category search (if search is empty)
     else:
