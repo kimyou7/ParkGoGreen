@@ -22,7 +22,7 @@
             your search.</p>
     {% else %}
         {% if msg %}
-            <p>{{msg}}{{ reports|pluralize }}.</p>
+            <p>Please enter something to search. Meanwhile, {{msg}}{{ reports|pluralize }}.</p>
         {% else %}
             <p>No park matches your search criteria, here are reports that share a category.</p><hr>
         {% endif %}
@@ -32,20 +32,18 @@
     <!-- display Park info if search are found -->
     {% for issue in reports %}
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-3">
                 <a href="{% url 'search:report_detail' issue.pk %}" target="_blank">
                     <img src="../{{ issue.thumbnail.url }}" class="img-thumbnail"/></a>
             </div>
-            <div class="col-sm-4">
-                <h3 class="my-6">Park Information</h3>
-                <br>
+            <div class="col-4">
                 <p>Park: <strong>{{ issue.park.name }}</strong></p>
                 <p>Date: <strong>{{ issue.sub_date }}</strong></p>
                 <p>Category: <strong>{{ issue.type }}</strong></p>
                 <p>Issue: <strong>{{ issue.description }}</strong></p>
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-4">
                 <iframe width="310" height="220" frameborder="0" style="border:0"
                         src="{{ issue.park.maps_string }}" allowfullscreen>
                 </iframe>
