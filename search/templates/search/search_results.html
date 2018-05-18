@@ -21,7 +21,11 @@
         <p>We have found <strong style="color: darkcyan">{{ reports|length }} report{{ reports|pluralize }}</strong> from
             your search.</p>
     {% else %}
-        <p>No park matches your search criteria, here are reports that share a category.</p><hr>
+        {% if msg %}
+            <p>{{msg}}</p>
+        {% else %}
+            <p>No park matches your search criteria, here are reports that share a category.</p><hr>
+        {% endif %}
     {% endif %}
     <hr>
 
