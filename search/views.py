@@ -77,7 +77,7 @@ def results(request):
 
     # Category search
     else:
-        if category == 'All':
+        if category == 'All Categories':
             reports = Report.objects.all()
             return render(request, 'search/search_results.html',
                           {'reports': reports, 'query': False, 'categories': categories.exclude(type__iexact=category),
