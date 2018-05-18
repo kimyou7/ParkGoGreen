@@ -56,7 +56,7 @@ def results(request):
                     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
                     error = "Not a valid zip code"
                     return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
-                reports = Report.objects.filter(type__type__iexact=category)
+                reports = Report.objects.all()
             return render(request, 'search/search_results.html', {
                 'reports': reports, 'query': query, 'categories': categories, 'cat': category, 'is_reports': True})
 
