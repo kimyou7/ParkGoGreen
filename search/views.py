@@ -78,12 +78,12 @@ def results(request):
     else:
         if category == 'All Categories':
             reports = Report.objects.all()
-            message = "Here are all park reports."
+            message = "Here are all park report"
             return render(request, 'search/search_results.html', {
                           'reports': reports, 'query': False, 'msg': message,
                           'categories': categories.exclude(type__iexact=category), 'cat': category})
         else:
-            message = "Here are all " + category + " reports."
+            message = "Here are the " + category.lower() + " report"
             reports = Report.objects.filter(type__type__iexact=category)
             return render(request, 'search/search_results.html', {
                           'reports': reports, 'query': False, 'msg': message,
