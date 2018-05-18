@@ -18,13 +18,14 @@
         <p>You searched for: <strong>{{ query }}</strong></p>
     {% endif %}
     {% if is_reports %}
-        <p>We have found <strong style="color: darkcyan">{{ reports|length }} report{{ reports|pluralize }}</strong> from
-            your search.</p>
+        <p>We have found <strong style="color: darkcyan">{{ reports|length }} 
+          report{{ reports|pluralize }}</strong> from your search.</p>
     {% else %}
         {% if msg %}
             <p>Please enter something to search. Meanwhile, {{msg}}{{ reports|pluralize }}.</p>
         {% else %}
-            <p>No park matches your search criteria, here are reports that share a category.</p><hr>
+            <p>No park{{ reports|pluralize }} matched your {{err}}, 
+              here are report{{ reports|pluralize }} that share the {{cat|lower}} category.</p><hr>
         {% endif %}
     {% endif %}
     <hr>

@@ -50,6 +50,12 @@ def results(request):
         if category == 'All Categories':
             if len(query) == 5 and query.isdigit():
                 reports = Report.objects.filter(park__zip_code__iexact=query, type__type__iexact=category)
+                if not reports:
+                    reports = Report.objects.all()
+                    return render(request, 'search/search_results.html', {
+                          'reports': reports, 'query': query, 
+                          'categories': categories, 'err': "zip code", 
+                          'cat': category, 'is_reports': False})
             else:
                 reports = Report.objects.filter(park__name__icontains=query, type__type__iexact=category)
             if not reports:
@@ -58,6 +64,10 @@ def results(request):
                     error = "Not a valid zip code"
                     return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
                 reports = Report.objects.all()
+                return render(request, 'search/search_results.html', {
+                    'reports': reports, 'query': query, 'err': "search criteria", 
+                    'categories': categories,
+                    'cat': category, 'is_reports': False})
             return render(request, 'search/search_results.html', {
                           'reports': reports, 'query': query, 
                           'categories': categories, 
@@ -67,6 +77,12 @@ def results(request):
         else:
             if len(query) == 5 and query.isdigit():
                 reports = Report.objects.filter(park__zip_code__iexact=query, type__type__iexact=category)
+                if not reports:
+                    reports = Report.objects.filter(type__type__iexact=category)
+                    return render(request, 'search/search_results.html', {
+                          'reports': reports, 'query': query, 'err': "zip code", 
+                          'categories': categories.exclude(type__iexact=category),
+                          'cat': category, 'is_reports': False})
             else:
                 reports = Report.objects.filter(park__name__icontains=query, type__type__iexact=category)  
             if not reports:
@@ -75,6 +91,10 @@ def results(request):
                     error = "Not a valid zip code"
                     return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
                 reports = Report.objects.filter(type__type__iexact=category)
+                return render(request, 'search/search_results.html', {
+                    'reports': reports, 'query': query, 'err': "search criteria", 
+                    'categories': categories.exclude(type__iexact=category),
+                    'cat': category, 'is_reports': False})
             return render(request, 'search/search_results.html', {
                           'reports': reports, 'query': query, 
                           'categories': categories.exclude(type__iexact=category),
