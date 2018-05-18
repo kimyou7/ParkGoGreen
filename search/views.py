@@ -49,22 +49,21 @@ def results(request):
 
         # Category set to All
         if category == 'All Categories':
-            reports = Report.objects.filter(park__name__icontains=query) | Report.objects.filter(
-                park__zip_code__iexact=query)
+            reports = Report.objects.filter(park__name__icontains=query) \
+                    | Report.objects.filter(park__zip_code__iexact=query)
             if not reports:
                 if len(query) > 5 and query.isdigit():
                     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
                     error = "Not a valid zip code"
                     return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
-                reports = Report.objects.filter(type__type__iexact=category)
+                reports = Report.objects.all()
             return render(request, 'search/search_results.html', {
                 'reports': reports, 'query': query, 'categories': categories, 'cat': category, 'is_reports': True})
 
-        # Category specified
+        # Query specified
         else:
-            reports = Report.objects.filter(park__name__icontains=query,
-                                            type__type__iexact=category) | Report.objects.filter(
-                park__zip_code__iexact=query, type__type__iexact=category)
+            reports = Report.objects.filter(park__name__icontains=query, type__type__iexact=category) \
+                    | Report.objects.filter(park__zip_code__iexact=query, type__type__iexact=category)
             if not reports:
                 if len(query) > 5 and query.isdigit():
                     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
@@ -77,16 +76,18 @@ def results(request):
 
     # Category search
     else:
-        if category == 'All':
+        if category == 'All Categories':
             reports = Report.objects.all()
-            return render(request, 'search/search_results.html',
-                          {'reports': reports, 'query': False, 'categories': categories.exclude(type__iexact=category),
-                           'cat': category})
+            message = "Here are all park report"
+            return render(request, 'search/search_results.html', {
+                          'reports': reports, 'query': False, 'msg': message,
+                          'categories': categories.exclude(type__iexact=category), 'cat': category})
         else:
+            message = "Here are the " + category.lower() + " report"
             reports = Report.objects.filter(type__type__iexact=category)
-            return render(request, 'search/search_results.html',
-                          {'reports': reports, 'query': False, 'categories': categories.exclude(type__iexact=category),
-                           'cat': category})
+            return render(request, 'search/search_results.html', {
+                          'reports': reports, 'query': False, 'msg': message,
+                          'categories': categories.exclude(type__iexact=category), 'cat': category})
 
 
 # Detailed report view in class form. Extends Django's generic DetailView.
