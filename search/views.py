@@ -49,8 +49,8 @@ def results(request):
 
         # Category set to All
         if category == 'All Categories':
-            reports = Report.objects.filter(park__name__icontains=query) | 
-                      Report.objects.filter(park__zip_code__iexact=query)
+            reports = Report.objects.filter(park__name__icontains=query) \
+                    | Report.objects.filter(park__zip_code__iexact=query)
             if not reports:
                 if len(query) > 5 and query.isdigit():
                     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
@@ -62,8 +62,8 @@ def results(request):
 
         # Query specified
         else:
-            reports = Report.objects.filter( park__name__icontains=query, type__type__iexact=category) | 
-                      Report.objects.filter(park__zip_code__iexact=query, type__type__iexact=category)
+            reports = Report.objects.filter(park__name__icontains=query, type__type__iexact=category) \
+                    | Report.objects.filter(park__zip_code__iexact=query, type__type__iexact=category)
             if not reports:
                 if len(query) > 5 and query.isdigit():
                     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
