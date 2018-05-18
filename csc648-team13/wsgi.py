@@ -12,8 +12,8 @@ import sys
 
 from django.core.wsgi import get_wsgi_application
 
-sys.path.append('/opt/bitnami/apps/django/django_projects/PROJECT')
-os.environ.setdefault("PYTHON_EGG_CACHE", "/opt/bitnami/apps/django/django_projects/PROJECT/egg_cache")
+sys.path.append('/opt/bitnami/apps/django/django_projects//opt/bitnami/apps/django/django_projects/csc648-team13')
+os.environ.setdefault("PYTHON_EGG_CACHE", "/opt/bitnami/apps/django/django_projects//opt/bitnami/apps/django/django_projects/csc648-team13/egg_cache")
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "csc648-team13.settings")
 
