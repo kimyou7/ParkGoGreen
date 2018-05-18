@@ -22,7 +22,7 @@
             your search.</p>
     {% else %}
         {% if msg %}
-            <p>{{msg}}{{ reports|pluralize }}.</p>
+            <p>Please enter something to search. Meanwhile, {{msg}}{{ reports|pluralize }}.</p>
         {% else %}
             <p>No park matches your search criteria, here are reports that share a category.</p><hr>
         {% endif %}
