@@ -59,7 +59,7 @@ def results(request):
             return render(request, 'search/search_results.html', {
                 'reports': reports, 'query': query, 'categories': categories, 'cat': category, 'is_reports': True})
 
-        # Query specified
+        # Category specified
         else:
             reports = Report.objects.filter(park__name__icontains=query, type__type__iexact=category) \
                     | Report.objects.filter(park__zip_code__iexact=query, type__type__iexact=category)
@@ -73,7 +73,7 @@ def results(request):
                 'reports': reports, 'query': query, 'categories': categories.exclude(type__iexact=category),
                 'cat': category, 'is_reports': True})
 
-    # Category search
+    # Category search (if search is empty)
     else:
         if category == 'All Categories':
             reports = Report.objects.all()
