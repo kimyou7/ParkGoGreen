@@ -8,12 +8,12 @@ is a dictionary that is passed to the template, which can be referenced by key i
 
 Created by Damico Shields according to Django Format.
 """
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, authenticate
 from django.views import generic
 from django.utils import timezone
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.urls import reverse_lazy
+from django.contrib.auth.models import User, Group
+
 
 from .models import Report, Category
 from .forms import PostForm, SignUpForm
@@ -22,7 +22,6 @@ from .forms import PostForm, SignUpForm
 # Homepage view. Retrieves 5 latest reports based on their submission date, loads homepage.html
 def index(request):
     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
-    login_form = AuthenticationForm
     return render(request, 'search/homepage.html', {'latest': latest})
 
 
@@ -101,10 +100,12 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
+            raw_username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            user = authenticate(username=raw_username, password=raw_password)
             login(request, user)
+            g = Group.objects.get(name='Registered User')
+            g.user_set.add(request.user)
             return redirect('search:index')
     else:
         form = SignUpForm()
