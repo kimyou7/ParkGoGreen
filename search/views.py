@@ -13,10 +13,12 @@ from django.contrib.auth import login, authenticate
 from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.models import User, Group
+from django_tables2 import RequestConfig
 
 
 from .models import Report, Category
 from .forms import PostForm, SignUpForm
+from .tables import ReportTable
 
 
 # Homepage view. Retrieves 5 latest reports based on their submission date, loads homepage.html
@@ -153,3 +155,9 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'search/post_report.html', {'form': form})
+
+
+def dash_table(request):
+    table = ReportTable(Report.objects.all())
+    RequestConfig(request).configure(table)
+    return render(request, 'search/dashboard.html', {'table': table})

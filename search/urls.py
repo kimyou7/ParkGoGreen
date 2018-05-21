@@ -14,4 +14,5 @@ urlpatterns = [
     path('report/<int:pk>', views.ReportDetailView.as_view(), name='report_detail'), # Uses the report's primary key
     path('signup/', views.signup, name='signup'),
     path('postnew/', views.post_new, name='postnew'),
+    path('dashboard/', views.dash_table, name='dashboard'),
 ]
