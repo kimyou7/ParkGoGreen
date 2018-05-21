@@ -10,6 +10,7 @@ Created by Damico Shields according to Django Format.
 """
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import permission_required
 from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.models import User, Group
@@ -157,6 +158,7 @@ def post_new(request):
     return render(request, 'search/post_report.html', {'form': form})
 
 
+@permission_required('search.delete_report')
 def dash_table(request):
     table = ReportTable(Report.objects.all())
     RequestConfig(request).configure(table)

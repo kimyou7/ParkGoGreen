@@ -1,4 +1,5 @@
 {% load static %}
+{% load auth_extras %}
 <br><center>SFSU Software Engineering Project, Spring 2018</center><br>
 
 <!DOCTYPE html>
@@ -112,6 +113,11 @@
                 <li class="nav-item">
                     <a class="btn btn-dark btn-lg" class="nav-link" href="{% url 'search:postnew' %}">Post Report</a>
                 </li>
+            {% if request.user|has_group:"City Manager" %}
+                <li class="nav-item">
+                    <a class="btn btn-dark btn-lg" class="nav-link" href="{% url 'search:dashboard' %}">Dashboard</a>
+                </li>
+            {% endif %}
 
                 <form class="form-row" style="padding-top: 10px" action="{% url 'search:results' %}" method="get">
                     <select name="dropdown">
