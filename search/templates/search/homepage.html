@@ -22,9 +22,10 @@
                 </div>
 
                 <div class="col-4">
-                    <iframe width="310" height="220" frameborder="0" style="border:0"
-                            src="{{ report.park.maps_string }}" allowfullscreen>
-                    </iframe>
+                    <a href="{% url 'search:report_detail' report.pk %}" target="_blank">
+                    <img width="250" height="250" frameborder="0" style="border:0"
+                         src="{{ report.park.static_string }}" allowfullscreen></a>
+                    </img>
                 </div>
             </div>
             <!-- /.row -->

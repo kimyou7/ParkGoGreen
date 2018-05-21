@@ -21,6 +21,7 @@ class Park(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     maps_string = models.CharField(max_length=1000, null=True, blank=True)
+    static_string = models.CharField(max_length=1000, null=True, blank=True)
     zip_code = models.CharField(max_length=5)
 
     def __str__(self):
@@ -29,7 +30,12 @@ class Park(models.Model):
     # Override save function to create and store the Google Maps string from the provided park name.
     def save(self, *args, **kwargs):
         if not self.maps_string:
-            self.maps_string = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBMDvz4zozQwoRPNcXrFX8OCGDp6c1FL7E&q=" + self.name.replace(" ", "+")
+            self.maps_string = "https://www.google.com/maps/embed/v1/place?key=" + \
+                               "AIzaSyBMDvz4zozQwoRPNcXrFX8OCGDp6c1FL7E&q=" + self.name.replace(" ", "+")
+        if not self.static_string:
+            self.static_string = "https://maps.googleapis.com/maps/api/staticmap?markers=" + \
+                                 self.name.replace(" ", "+") + \
+                                 "&size=400x400&zoom=12&key=AIzaSyD_g-oOuyVFlnlCbL7JLkO9wt-UOWruIMg"
         super(Park, self).save(*args, **kwargs)
 
 
