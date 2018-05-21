@@ -112,54 +112,6 @@
 
     </div>
 </nav>
-
-{#<nav class="navbar-expand-lg navbar-dark bg-dark navbar-default">#}
-{#    <div class="container">#}
-{##}
-{#        <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse"#}
-{#                data-target="#navbarResponsive" aria-controls="#navbarResponsive" aria-expanded="false"#}
-{#                aria-label="Toggle navigation">#}
-{#            <span class="navbar-toggler-icon"></span>#}
-{#        </button>#}
-{#        <div class="collapse navbar-collapse" id="navbarResponsive">#}
-{#            <ul class="navbar-nav" style="">#}
-{#                <li class="nav-item">#}
-{#                    <a class="btn btn-dark btn-lg" class="nav-link" href="about.html">About</a>#}
-{#                </li>#}
-{#                <li class="nav-item">#}
-{#                    <a class="btn btn-dark btn-lg" class="nav-link" href="{% url 'search:postnew' %}">Post Report</a>#}
-{#                </li>#}
-{#            {% if request.user|has_group:"City Manager" %}#}
-{#                <li class="nav-item">#}
-{#                    <a class="btn btn-dark btn-lg" class="nav-link" href="{% url 'search:dashboard' %}">Dashboard</a>#}
-{#                </li>#}
-{#            {% endif %}#}
-{##}
-{#                <form class="form-row" style="padding-top: 10px" action="{% url 'search:results' %}" method="get">#}
-{#                    <select name="dropdown">#}
-{#                        {% block category %}#}
-{#                        <option value="All Categories" selected>All Categories</option>#}
-{#                        <option value="Bathroom">Bathroom</option>#}
-{#                        <option value="Garbage">Garbage</option>#}
-{#                        <option value="Medical Waste">Medical Waste</option>#}
-{#                        <option value="Oil Spill">Oil Spill</option>#}
-{#                        <option value="Other">Other</option>#}
-{#                        {% endblock %}#}
-{#                    </select>#}
-{#                    <input type="text" name="q" style="padding: 0px 10px 0px " placeholder="Park name or Zip Code"#}
-{#                           autocomplete="off" value="{% block query %}{% endblock %}">#}
-{#                    <div class="input-group-btn">#}
-{#                        <button type="submit" class="btn btn-success">Search</button>#}
-{#                    </div>#}
-{#                </form>#}
-{##}
-{##}
-{#            </ul>#}
-{#        </div>#}
-{##}
-{#    </div>#}
-{#</nav>#}
-
 {% block content %}{% endblock %}
 
 </body>
