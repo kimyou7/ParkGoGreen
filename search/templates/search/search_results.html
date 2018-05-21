@@ -2,38 +2,49 @@
 
 {% block content %}
     <br>
+
+    <p hidden>
+        {% block query %}{% if query %}{{query}}{% endif %}{% endblock %}
+        {% block category %}
+            <option value="{{cat}}" selected>{{cat}}</option>
+            {% for category in categories %}
+                <option value="{{category}}">{{category}}</option>
+            {% endfor %}
+        {% endblock %}
+    </p>
+
     <div class="container">
     {% if query %}
         <p>You searched for: <strong>{{ query }}</strong></p>
     {% endif %}
     {% if is_reports %}
-        <p>We have found <strong style="color: darkcyan">{{ reports|length }} park{{ reports|pluralize }}</strong> from
-            your search.</p>
-    {% elif similar %}
-        <p>No park matches your search criteria, here are similar reports.</p><hr>
+        <p>We have found <strong style="color: darkcyan">{{ reports|length }} 
+          report{{ reports|pluralize }}</strong> from your search.</p>
     {% else %}
-        <p>Please select a category to search.</p>
+        {% if msg %}
+            <p>Please enter something to search. Meanwhile, {{msg}}{{ reports|pluralize }}.</p>
+        {% else %}
+            <p>No park{{ reports|pluralize }} matched your {{err}}, 
+              here are report{{ reports|pluralize }} that share the {{cat|lower}} category.</p><hr>
+        {% endif %}
     {% endif %}
     <hr>
 
     <!-- display Park info if search are found -->
-
     {% for issue in reports %}
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-3">
                 <a href="{% url 'search:report_detail' issue.pk %}" target="_blank">
                     <img src="../{{ issue.thumbnail.url }}" class="img-thumbnail"/></a>
             </div>
-            <div class="col-sm-4">
-                <h3 class="my-6">Park Information</h3>
-                <br>
+            <div class="col-4">
                 <p>Park: <strong>{{ issue.park.name }}</strong></p>
                 <p>Date: <strong>{{ issue.sub_date }}</strong></p>
                 <p>Category: <strong>{{ issue.type }}</strong></p>
                 <p>Issue: <strong>{{ issue.description }}</strong></p>
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-4">
                 <iframe width="310" height="220" frameborder="0" style="border:0"
                         src="{{ issue.park.maps_string }}" allowfullscreen>
                 </iframe>
@@ -43,9 +54,4 @@
     {% endfor %}
     </div>
 
-
 {% endblock %}
-
-
-
-

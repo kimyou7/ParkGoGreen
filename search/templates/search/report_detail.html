@@ -18,7 +18,7 @@
                     <li style=""><p>Park: <strong>{{ report.park.name }}</strong></p></li>
                     <li style=""><p>Submission date: <strong>{{ report.sub_date }}</strong></p></li>
                     <li style=""><p>Category: <strong>{{ report.type }}</strong></p></li>
-                    <li style=""><p>Issue: <strong>{{ report.description }}</strong></p></li>
+                    <li style=""><p>Status: <strong>{{ report.status }}</strong></p></li>
                 </ul>
             </div>
             <div class="col-3">
@@ -32,11 +32,7 @@
         <hr>
 
         <h3 class="my-3">Details</h3>
-        <p style="padding-bottom: 50px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod
-            odio,
-            gravida pellentesque
-            urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies,
-            justo eu convallis placerat, felis enim.</p>
+        <p style="padding-bottom: 50px">{{ report.description }}</p>
 
     </div>
     <!-- /.container -->
