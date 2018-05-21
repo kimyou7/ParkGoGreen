@@ -10,7 +10,9 @@
         <!-- Report details -->
         <div class="row">
             <div class="col-3">
-                <a href="../{{ report.image.url }}"><img class="img-thumbnail" src="../{{ report.image.url }}" alt=""></a>
+                {% if report.image %}
+                    <a href="../{{ report.image.url }}"><img class="img-thumbnail" src="../{{ report.image.url }}" alt=""></a>
+                {% endif %}
             </div>
             <div class="col-5">
                 <h3 class="" style="padding-bottom: 20px">Park Information</h3>

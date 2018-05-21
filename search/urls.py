@@ -15,4 +15,6 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('postnew/', views.post_new, name='postnew'),
     path('dashboard/', views.dash_table, name='dashboard'),
+    path('update/<int:pk>/', views.ReportUpdate.as_view(), name='report_update'),
+    path('update/<int:pk>/delete/', views.ReportDelete.as_view(), name='report_delete'),
 ]

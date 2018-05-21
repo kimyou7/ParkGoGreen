@@ -11,8 +11,10 @@
             <div class="row">
 
                 <div class="col-3">
-                    <a href="{% url 'search:report_detail' report.pk %}" target="_blank">
-                        <img src="../{{ report.thumbnail.url }}" class="img-thumbnail"/></a>
+                    {% if report.thumbnail %}
+                        <a href="{% url 'search:report_detail' report.pk %}" target="_blank">
+                            <img src="../{{ report.thumbnail.url }}" class="img-thumbnail"/></a>
+                    {% endif %}
                 </div>
                 <div class="col-4">
                     <p> Park: <strong>{{ report.park }}</strong></p>

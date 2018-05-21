@@ -72,6 +72,10 @@ class Report(models.Model):
     def __str__(self):
         return self.park.name + " " + str(self.sub_date)
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('search:report_detail', args=[str(self.id)])
+
     # Override save function to create thumbnail.
     def save(self, *args, **kwargs):
         if not self.image.closed:

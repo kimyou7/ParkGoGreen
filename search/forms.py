@@ -38,3 +38,10 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+
+
+class UpdateForm(forms.ModelForm):
+    class Meta:
+        model = Report
+        fields = ['type', 'status', 'description']
+    description = forms.CharField(disabled=True)

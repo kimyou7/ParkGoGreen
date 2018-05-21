@@ -9,6 +9,7 @@ is a dictionary that is passed to the template, which can be referenced by key i
 Created by Damico Shields according to Django Format.
 """
 from django.shortcuts import render, redirect, reverse
+from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import permission_required
 from django.views import generic
@@ -18,7 +19,7 @@ from django_tables2 import RequestConfig
 
 
 from .models import Report, Category
-from .forms import PostForm, SignUpForm
+from .forms import PostForm, SignUpForm, UpdateForm
 from .tables import ReportTable
 
 
@@ -156,6 +157,17 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'search/post_report.html', {'form': form})
+
+
+class ReportUpdate(generic.UpdateView):
+    model = Report
+    form_class = UpdateForm
+    template_name_suffix = '_update_form'
+
+
+class ReportDelete(generic.DeleteView):
+    model = Report
+    success_url = reverse_lazy('search:index')
 
 
 @permission_required('search.delete_report')

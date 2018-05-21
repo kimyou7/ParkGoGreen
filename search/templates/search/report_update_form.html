@@ -1,0 +1,29 @@
+{% extends "search/base_generic.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+
+            </div>
+
+            <div class="col-7">
+                <h2 class="text-center">Update Report</h2>
+                {% if not user.is_authenticated %}
+                    <p>Please sign in as a city manager to be able to update reports.</p><hr>
+                {% endif %}
+                <form method="post" class="post-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">Update</button>
+                </form>
+            </div>
+
+            <div class="col-3">
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
