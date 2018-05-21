@@ -161,5 +161,5 @@ def post_new(request):
 @permission_required('search.delete_report')
 def dash_table(request):
     table = ReportTable(Report.objects.all())
-    RequestConfig(request).configure(table)
+    RequestConfig(request, paginate={'per_page': 10}).configure(table)
     return render(request, 'search/dashboard.html', {'table': table})
