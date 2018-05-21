@@ -50,9 +50,6 @@
         background-color: #14aa75;
     }
 
-    .container-fluid {
-        padding-bottom: 50px;
-    }
 
     .form-row {
         margin-left: 250px;
@@ -63,32 +60,28 @@
 
     <!-- Header template for every pages -->
     <div class="container-fluid">
-        <div class="">
-            <a href="{% url 'search:index' %}"><img src="{% static "search/Park Report.png" %}"
-                style="float: left"/></a>
+        <div class="row align-items-center">
+            <div class="col-sm">
+                <a href="{% url 'search:index' %}"><img src="{% static "search/Park Report.png" %}"
+                    style="float: left"/></a>
+            </div>
+
+            <div class="col-sm"><p>Our website is dedicated to solving any and all environmental issues in your
+                local parks!</p>
+                {% if error %}
+                    <p>{{ error }}</p>
+                {% endif %}
+            </div>
+
+            <div class="col-sm">
+                {% if user.is_authenticated %}
+                    <a class="nav-link1" href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a class="nav-link1" href="{% url 'login' %}">Login</a>
+                    <a class="nav-link1" href="{% url 'search:signup' %}">Sign Up</a>
+                {% endif %}
+            </div>
         </div>
-
-        <div class="row" style="float: right">
-            {% if user.is_authenticated %}
-                <a class="nav-link1" href="{% url 'logout' %}">Logout</a>
-            {% else %}
-                <a class="nav-link1" href="{% url 'login' %}">Login</a>
-                <a class="nav-link1" href="{% url 'search:signup' %}">Sign Up</a>
-            {% endif %}
-        </div>
-
-        <center>
-            {% if error %}
-                <p>{{ error }}</p>
-            {% endif %}
-
-
-        </center>
-
-        <center style="padding-bottom: 10px"> Our website is dedicated to solving any and all environmental issues in
-            your local
-            parks!
-        </center>
     </div>
     <!-- End of Header template for every pages -->
 
@@ -120,7 +113,7 @@
                     <a class="btn btn-dark btn-lg" class="nav-link" href="{% url 'search:postnew' %}">Post Report</a>
                 </li>
 
-                <form class="navbar-form form-row" style="padding-top: 10px" action="{% url 'search:results' %}" method="get">
+                <form class="form-row" style="padding-top: 10px" action="{% url 'search:results' %}" method="get">
                     <select name="dropdown">
                         {% block category %}
                         <option value="All Categories" selected>All Categories</option>
