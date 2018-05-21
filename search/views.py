@@ -159,12 +159,14 @@ def post_new(request):
     return render(request, 'search/post_report.html', {'form': form})
 
 
+@permission_required('search.change_report')
 class ReportUpdate(generic.UpdateView):
     model = Report
     form_class = UpdateForm
     template_name_suffix = '_update_form'
 
 
+@permission_required('search.delete_report')
 class ReportDelete(generic.DeleteView):
     model = Report
     success_url = reverse_lazy('search:index')
