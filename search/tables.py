@@ -4,7 +4,7 @@ from .models import Report
 
 
 class ReportTable(tables.Table):
-    link = tables.LinkColumn('search:report_detail', text='Link', args=[A('pk')], attrs={'a': {'target': '_blank'}})
+    link = tables.LinkColumn('search:report_detail', text='Link', args=[A('pk')], attrs={'a': {'target': '_blank'}}, orderable=False)
 
     class Meta:
         model = Report

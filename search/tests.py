@@ -78,7 +78,7 @@ class ChromeInvalid(unittest.TestCase):
         driver.find_element_by_name("q").clear()
         driver.find_element_by_name("q").send_keys("-1234")
         driver.find_element_by_name("q").send_keys(Keys.ENTER)
-        self.assertEqual("Please enter alphanumeric characters only. Search either by zip code, park name or city name.", driver.find_element_by_xpath("//p").text)
+        self.assertEqual("Please enter alphanumeric characters only. Search either by zip code, park name or city name.", driver.find_element_by_xpath("//p[2]").text)
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
