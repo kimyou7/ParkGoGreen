@@ -23,7 +23,7 @@
         {% endfor %}
     {% endif %}
     <div class="container">
-        <form role="form">
+        <form role="form" method="post" enctype="multipart/form-data">
             <legend>Post a new report</legend>
             {% csrf_token %}
             {{ form|bootstrap }}
