@@ -12,6 +12,7 @@ from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.models import User, Group
@@ -159,23 +160,17 @@ def post_new(request):
     return render(request, 'search/post_report.html', {'form': form})
 
 
-class ReportUpdate(generic.UpdateView):
+class ReportUpdate(PermissionRequiredMixin, generic.UpdateView):
+    permission_required = 'search.change_report'
     model = Report
     form_class = UpdateForm
     template_name_suffix = '_update_form'
 
-    @permission_required('search.change_report')
-    def dispatch(self, request, *args, **kwargs):
-        return super(ReportUpdate, self).dispatch(*args, **kwargs)
 
-
-class ReportDelete(generic.DeleteView):
+class ReportDelete(PermissionRequiredMixin, generic.DeleteView):
+    permission_required = 'search.delete_report'
     model = Report
     success_url = reverse_lazy('search:index')
-
-    @permission_required('search.delete_report')
-    def dispatch(self, request, *args, **kwargs):
-        return super(ReportDelete, self).dispatch(*args, **kwargs)
 
 
 @permission_required('search.delete_report')
