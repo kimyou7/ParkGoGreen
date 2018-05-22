@@ -8,5 +8,5 @@ class ReportTable(tables.Table):
 
     class Meta:
         model = Report
-        template_name = 'django_tables2/bootstrap.html'
+        template_name = 'django_tables2/bootstrap4.html'
         exclude = ['id', 'image', 'thumbnail']
