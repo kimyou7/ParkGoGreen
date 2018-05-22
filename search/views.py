@@ -146,11 +146,10 @@ def signup(request):
 
 
 # Posts new report. On success, redirects to the new individual report page. On failure, reloads with saved info.
-@login_required()
+# @login_required()
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
-        # request.session['new_report'] = form
         if form.is_valid() and request.user.is_authenticated:
             post = form.save(commit=False)
             post.user = request.user
