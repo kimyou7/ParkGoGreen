@@ -1,29 +1,24 @@
 {% extends "search/base_generic.html" %}
+{% load bootstrap %}
 
 {% block content %}
-
-    <div class="container">
-        <div class="row">
-            <div class="col-2">
-
-            </div>
-
-            <div class="col-7">
-                <h2 class="text-center">Update Report</h2>
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+            <div class="container">
                 {% if not user.is_authenticated %}
                     <p>Please sign in as a city manager to be able to update reports.</p><hr>
                 {% endif %}
-                <form method="post" class="post-form" enctype="multipart/form-data">
+                <form role="form" method="post" class="post-form" enctype="multipart/form-data">
+                    <legend>Update Report</legend>
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-success">Update</button>
+                    {{ form|bootstrap }}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </div>
                 </form>
             </div>
-
-            <div class="col-3">
-
-            </div>
         </div>
+        <div class="col-sm"></div>
     </div>
-
 {% endblock %}
