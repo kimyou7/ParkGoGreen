@@ -25,4 +25,5 @@ urlpatterns = [
     path('about/andrew/', TemplateView.as_view(template_name='search/andrewprofile.html'), name='andrew'),
     path('about/leo/', TemplateView.as_view(template_name='search/leoprofile.html'), name='leo'),
     path('about/kimyou/', TemplateView.as_view(template_name='search/kimprofile.html'), name='kimyou'),
+    path('privacy/', TemplateView.as_view(template_name='search/privacy.html'), name='privacy'),
 ]
