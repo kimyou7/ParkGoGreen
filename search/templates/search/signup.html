@@ -1,79 +1,64 @@
 {% extends "search/base_generic.html" %}
-
-<html lang="en">
-<head>
-    <title>Sign Up</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <style>
-        body {
-            color: #fff;
-            font-family: 'Roboto', sans-serif;
-            text-align: center;
-        }
-
-        .container {
-            text-align-all: center;
-            background-color: #2daa6b;
-        }
-
-    </style>
-
-</head>
+{% load bootstrap %}
 
 {% block content %}
-
-    <body>
     <div class="container">
-        <div class="row">
-            <div class="col-2">
-
+        <form role="form">
+            <legend>Sign Up</legend>
+            {% csrf_token %}
+            {{ form|bootstrap }}
+            <div class="form-group">
+                <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the
+                    <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="{% url 'search:index' %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Cancel</a>
             </div>
-
-            <div class="col-7"
-                 style="margin: 30px 0px 30px 0px; padding:20px 20px 50px 20px; background-color: rgba(185,187,190,0.19)">
-                <h3 class="text-center">Registration</h3>
-                <p>Please fill in this form to create an account!</p>
-                <hr>
-                <div class="form-group">
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <medium id="emailHelp" class="form-text text-muted">- Password can't be too similar to your
-                            other personal information.
-                        </medium>
-                        <medium id="emailHelp" class="form-text text-muted">- Password must contain at least 8
-                            characters.
-                        </medium>
-                        <medium id="emailHelp" class="form-text text-muted">- Password can't be a commonly used
-                            password.
-                        </medium>
-                        <medium id="emailHelp" class="form-text text-muted">- Password can't be entirely numeric.
-                        </medium>
-                        <br>
-                        <div class="form-group">
-                            <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a
-                                    href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
-                        </div>
-                        <a href="{% url 'search:index' %}" class="btn btn-outline-secondary" role="button"
-                           aria-pressed="true" style="margin-left: 180px">Cancel</a>
-                        <button type="submit" class="btn btn-success">Sign up</button>
-                    </form>
-                </div>
-                <hr>
-                <div class="text-center">Already have an account? <a href="{% url 'login' %}">Login here</a></div>
-            </div>
-            <div class="col-2">
-
-            </div>
-        </div>
+        </form>
     </div>
-    </body>
-{% endblock %}
 
-</html>
+
+{#        <div class="row">#}
+{#            <div class="col-2">#}
+{##}
+{#            </div>#}
+{##}
+{#            <div class="col-7"#}
+{#                 style="margin: 30px 0px 30px 0px; padding:20px 20px 50px 20px; background-color: rgba(185,187,190,0.19)">#}
+{#                <h3 class="text-center">Registration</h3>#}
+{#                <p>Please fill in this form to create an account!</p>#}
+{#                <hr>#}
+{#                <div class="form-group">#}
+{#                    <form method="post">#}
+{#                        {% csrf_token %}#}
+{#                        {{ form.as_p }}#}
+{#                        <medium id="emailHelp" class="form-text text-muted">- Password can't be too similar to your#}
+{#                            other personal information.#}
+{#                        </medium>#}
+{#                        <medium id="emailHelp" class="form-text text-muted">- Password must contain at least 8#}
+{#                            characters.#}
+{#                        </medium>#}
+{#                        <medium id="emailHelp" class="form-text text-muted">- Password can't be a commonly used#}
+{#                            password.#}
+{#                        </medium>#}
+{#                        <medium id="emailHelp" class="form-text text-muted">- Password can't be entirely numeric.#}
+{#                        </medium>#}
+{#                        <br>#}
+{#                        <div class="form-group">#}
+{#                            <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a#}
+{#                                    href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>#}
+{#                        </div>#}
+{#                        <a href="{% url 'search:index' %}" class="btn btn-outline-secondary" role="button"#}
+{#                           aria-pressed="true" style="margin-left: 180px">Cancel</a>#}
+{#                        <button type="submit" class="btn btn-success">Sign up</button>#}
+{#                    </form>#}
+{#                </div>#}
+{#                <hr>#}
+{#                <div class="text-center">Already have an account? <a href="{% url 'login' %}">Login here</a></div>#}
+{#            </div>#}
+{#            <div class="col-2">#}
+{##}
+{#            </div>#}
+{#        </div>#}
+    </div>
+{% endblock %}
