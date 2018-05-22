@@ -19,7 +19,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
-chromedriver_path = '<your_chromedriver.exe_path>'
+chromedriver_path = '<C:/YOUR/chromedriver.exe_path>'
 
 class ChromePark(unittest.TestCase):
     def setUp(self):
@@ -87,7 +87,7 @@ class ChromeInvalid(unittest.TestCase):
         driver.find_element_by_name("q").clear()
         driver.find_element_by_name("q").send_keys("-1234")
         driver.find_element_by_name("q").send_keys(Keys.ENTER)
-        self.assertEqual("Please enter alphanumeric characters only. Search either by zip code, park name or city name.", driver.find_element_by_xpath("//p[2]").text)
+        self.assertEqual("Please enter alphanumeric characters only. Search either by zip code or park name.", driver.find_element_by_xpath("//p[3]").text)
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
@@ -132,7 +132,7 @@ class ChromeSimilar(unittest.TestCase):
         driver.find_element_by_name("q").clear()
         driver.find_element_by_name("q").send_keys("94110")
         driver.find_element_by_name("q").send_keys(Keys.ENTER)
-        self.assertEqual("No parks matched your zip code, here are reports that share the bathroom category.", driver.find_element_by_xpath("//p[2]").text)
+        self.assertEqual("No parks matched your zip code, here are reports that share the bathroom category.", driver.find_element_by_xpath("//div[1]/p[2]").text)
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
