@@ -41,10 +41,11 @@
             <div class="col-sm">
                 <a href="{% url 'search:index' %}"><img src="{% static "search/Park Report.png" %}" style="float: left"/></a>
             </div>
-            <div class="col-sm">SFSU Software Engineering Project, Spring 2018<br>
-                <p>Our website is dedicated to solving any and all environmental issues in your local parks!</p>
+            <div class="col-sm">
+                <p class="text-center">SFSU Software Engineering Project, Spring 2018</p>
+                <p class="text-center">Our website is dedicated to solving any and all environmental issues in your local parks!</p>
                 {% if error %}
-                    <p>{{ error }}</p>
+                    <p class="text-center">{{ error }}</p>
                 {% endif %}
             </div>
             <div class="col-sm"></div>

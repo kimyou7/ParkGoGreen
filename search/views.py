@@ -44,11 +44,11 @@ def results(request):
         # Input validation
         if not all(x.isalnum() or x.isspace() for x in query):
             latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
-            error = "Please enter alphanumeric characters only. Search either by zip code, park name or city name."
+            error = "Please enter alphanumeric characters only. Search either by zip code or park name."
             return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
         if len(query) > 40:
             latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
-            error = "Please keep search under 40 characters. Search either by zip code, park name or city name"
+            error = "Please keep search under 40 characters. Search either by zip code or park name"
             return render(request, 'search/homepage.html', {'latest': latest, 'error': error})
 
         # Category set to All
