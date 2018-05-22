@@ -113,13 +113,13 @@ def results(request):
             message = "here are all of the park report"
             return render(request, 'search/search_results.html', {
                           'reports': reports, 'query': False, 'msg': message,
-                          'categories': categories.exclude(type__iexact=category), 'cat': category})
+                          'categories': categories, 'cat': category})
         else:
             message = "here are the " + category.lower() + " report"
             reports = Report.objects.filter(type__type__iexact=category)
             return render(request, 'search/search_results.html', {
                           'reports': reports, 'query': False, 'msg': message,
-                          'categories': categories.exclude(type__iexact=category), 'cat': category})
+                          'categories': categories, 'cat': category})
 
 
 # Detailed report view in class form. Extends Django's generic DetailView.
