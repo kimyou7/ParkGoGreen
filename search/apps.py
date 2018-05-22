@@ -1,6 +1,9 @@
+"""
+List of applications, each one has its own urls, views, templates, etc.
+"""
+
 from django.apps import AppConfig
 
 
-# List of applications, created by Django
 class SearchConfig(AppConfig):
     name = 'search'
