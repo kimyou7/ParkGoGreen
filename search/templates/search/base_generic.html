@@ -78,13 +78,17 @@
         </ul>
         <form class="form-inline my-2 my-lg-0 mx-auto d-block" action="{% url 'search:results' %}">
                 <select name="dropdown" class="form-control" id="sel1">
-                    {% block category %}
-                        <option value="All Categories" selected>All Categories</option>
-                        <option value="Bathroom">Bathroom</option>
-                        <option value="Garbage">Garbage</option>
-                        <option value="Medical Waste">Medical Waste</option>
-                        <option value="Oil Spill">Oil Spill</option>
-                        <option value="Other">Other</option>
+                    {% block category_block %}
+                        {% for type in issue_types %}
+{#                        <option value="All Categories" selected>All Categories</option>#}
+{#                        <option value="Bathroom">Bathroom</option>#}
+{#                        <option value="Garbage">Garbage</option>#}
+{#                        <option value="Medical Waste">Medical Waste</option>#}
+{#                        <option value="Oil Spill">Oil Spill</option>#}
+{#                        <option value="Other">Other</option>#}
+                            <option value="{{ type }}" {% if type.type == "All Categories" %}selected{% endif %}>
+                                {{ type }}</option>
+                        {% endfor %}
                     {% endblock %}
                 </select>
 

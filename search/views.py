@@ -27,7 +27,8 @@ from .tables import ReportTable
 # Homepage view. Retrieves 5 latest reports based on their submission date, loads homepage.html
 def index(request):
     latest = Report.objects.filter(sub_date__lte=timezone.now()).order_by('-sub_date')[:5]
-    return render(request, 'search/homepage.html', {'latest': latest})
+    issue_types = Category.objects.all()
+    return render(request, 'search/homepage.html', {'latest': latest, 'issue_types': issue_types})
 
 
 # Search results view. Called by the form in base_generic.html Takes the category and type, uses them to filter results
@@ -86,7 +87,7 @@ def results(request):
                     reports = Report.objects.filter(type__type__iexact=category)
                     return render(request, 'search/search_results.html', {
                           'reports': reports, 'query': query, 'err': "zip code", 
-                          'categories': categories.exclude(type__iexact=category),
+                          'categories': categories,
                           'cat': category, 'is_reports': False})
             else:
                 reports = Report.objects.filter(park__name__icontains=query, type__type__iexact=category)  
@@ -98,11 +99,11 @@ def results(request):
                 reports = Report.objects.filter(type__type__iexact=category)
                 return render(request, 'search/search_results.html', {
                     'reports': reports, 'query': query, 'err': "search criteria", 
-                    'categories': categories.exclude(type__iexact=category),
+                    'categories': categories,
                     'cat': category, 'is_reports': False})
             return render(request, 'search/search_results.html', {
                           'reports': reports, 'query': query, 
-                          'categories': categories.exclude(type__iexact=category),
+                          'categories': categories,
                           'cat': category, 'is_reports': True})
 
     # Category search (if search is empty)

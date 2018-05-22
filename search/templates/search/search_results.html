@@ -4,11 +4,14 @@
     <br>
 
     <p hidden>
-        {% block query %}{% if query %}{{query}}{% endif %}{% endblock %}
-        {% block category %}
-            <option value="{{cat}}" selected>{{cat}}</option>
-            {% for category in categories %}
-                <option value="{{category}}">{{category}}</option>
+        {% block query %}
+            {% if query %}
+                {{query}}
+            {% endif %}
+        {% endblock %}
+        {% block category_block %}
+            {% for type in categories %}
+                <option value="{{ type }}" {% if type.type == cat %}selected{% endif %}>{{ type }}</option>
             {% endfor %}
         {% endblock %}
     </p>
