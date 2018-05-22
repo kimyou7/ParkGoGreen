@@ -11,7 +11,7 @@ Created by Damico Shields according to Django Format.
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views import generic
 from django.utils import timezone
@@ -145,6 +145,7 @@ def signup(request):
 
 
 # Posts new report. On success, redirects to the new individual report page. On failure, reloads with saved info.
+@login_required()
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
