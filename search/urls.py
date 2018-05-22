@@ -1,7 +1,7 @@
 """
-Urls specific to this application.
-
-Created by Damico Shields according to Django format.
+search/urls.py
+The urls specific to this application. Allow for easy linking in HTML pages by typing {% url 'search:name' %}, which
+will redirect towards the url with that name attribute.
 """
 from django.urls import path
 from django.views.generic import TemplateView

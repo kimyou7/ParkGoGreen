@@ -8,6 +8,13 @@
 
 # Each model should have a __str__ method that returns a string when an instance of the model is referenced.
 
+"""
+models.py
+
+This is where you strcuture the models, then create them in the database by running the makemigrations and migrate
+commands. This is the core of Django's model based views and forms.
+"""
+
 import os.path
 from PIL import Image
 from io import BytesIO
@@ -16,7 +23,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# Model of the park, creates Google Maps url when save() is called
+# Model of the park, creates embedded and static Google Maps urls when save() is called. Managed by admins.
 class Park(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
@@ -27,7 +34,7 @@ class Park(models.Model):
     def __str__(self):
         return self.name
 
-    # Override save function to create and store the Google Maps string from the provided park name.
+    # Override save function to create and store the Google Maps strings from the provided park name.
     def save(self, *args, **kwargs):
         if not self.maps_string:
             self.maps_string = "https://www.google.com/maps/embed/v1/place?key=" + \
@@ -39,7 +46,7 @@ class Park(models.Model):
         super(Park, self).save(*args, **kwargs)
 
 
-# Category of the report
+# Report type (Garbage, Oil Spill, etc.). Managed by admins.
 class Category(models.Model):
     type = models.CharField(max_length=200)
 
@@ -47,7 +54,7 @@ class Category(models.Model):
         return self.type
 
 
-# Status of the report
+# Report status (submitted, in progress, etc.). Managed by admins.
 class Status(models.Model):
     current_status = models.CharField(max_length=200)
 
@@ -55,14 +62,15 @@ class Status(models.Model):
         return self.current_status
 
 
-# Report model. Automatically takes the current time from the set Timezone. Description and image must be included
+# Report model. Automatically takes the current time from the set Timezone. Description and image will be included
 # by whoever creates it. Type, status, and the park are chosen from drop down menus. The user should be set by grabbing
 # whoever is logged in. The image will be saved to the csc648-team13/media/photos folder. When the report is saved,
 # a thumbnail is created, saved to the csc648-team13/media/thumbs folder, and the url is added to the thumbnail field.
 class Report(models.Model):
     sub_date = models.DateTimeField(auto_now_add=True)
     description = models.TextField(max_length=1000, help_text="Please enter a short description of the issue.")
-    image = models.ImageField(upload_to='photos', null=True, blank=True, help_text="Upload an image of the issue if you have one.")
+    image = models.ImageField(upload_to='photos', null=True, blank=True, help_text="Upload an image of the"
+                                                                                   " issue if you have one.")
     thumbnail = models.ImageField(upload_to='thumbs', editable=False, null=True)
     type = models.ForeignKey(Category, on_delete=models.CASCADE, help_text="Please select the type of issue.")
     status = models.ForeignKey(Status, on_delete=models.CASCADE, default=1)
@@ -72,6 +80,7 @@ class Report(models.Model):
     def __str__(self):
         return self.park.name + " " + str(self.sub_date)
 
+    # When a new report is successfully created, this redirects the user to it's new report detail page.
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('search:report_detail', args=[str(self.id)])

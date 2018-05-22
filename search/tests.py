@@ -1,3 +1,12 @@
+"""
+tests.py
+
+Automated tests that are written here are run with the manage.py test command.
+
+Included is an automated Selenium test written by Jaimes Subroto.
+"""
+
+
 from django.test import TestCase
 
 # Create your tests here.
