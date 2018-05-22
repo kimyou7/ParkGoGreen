@@ -47,14 +47,3 @@ class UpdateForm(forms.ModelForm):
         model = Report
         fields = ['type', 'status', 'description']
     description = forms.CharField(disabled=True)
-
-
-def validate_search(text):
-    if not all(x.isalnum() or x.isspace() for x in text):
-        raise ValidationError(_('Please enter alphanumeric characters only. Search either by zip code or park name.'))
-
-
-
-class SearchForm(forms.Form):
-    type_field = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label=None)
-    search_field = forms.CharField(max_length=40)
