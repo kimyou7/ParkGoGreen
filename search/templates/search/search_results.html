@@ -23,8 +23,8 @@
         {% if msg %}
             <p>Please enter something to search. Meanwhile, {{msg}}{{ reports|pluralize }}.</p>
         {% else %}
-            <p>No park{{ reports|pluralize }} matched your {{err}}, 
-              here are report{{ reports|pluralize }} that share the {{cat|lower}} category.</p><hr>
+            <p>No park{{ reports|pluralize }} matched your {{err}}, {% if allmsg %}{{ allmsg }}{% else %}
+              here are report{{ reports|pluralize }} that share the {{cat|lower}} category.</p><hr>{% endif %}
         {% endif %}
     {% endif %}
     <hr>

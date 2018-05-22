@@ -60,10 +60,11 @@ def results(request):
                 reports = Report.objects.filter(park__zip_code__iexact=query)
                 if not reports:
                     reports = Report.objects.all()
+                    allmsg = "here are all of the park reports."
                     return render(request, 'search/search_results.html', {
                           'reports': reports, 'query': query, 
                           'categories': categories, 'err': "zip code", 
-                          'cat': category, 'is_reports': False})
+                          'cat': category, 'is_reports': False, 'allmsg': allmsg})
             else:
                 reports = Report.objects.filter(park__name__icontains=query)  # Park name search
             if not reports:  # if neither is found, similar reports are found
