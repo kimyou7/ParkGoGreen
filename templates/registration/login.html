@@ -12,7 +12,7 @@
             {% endif %}
         {% endif %}
         <form role="form" method="post" action="{% url 'login' %}">
-            <legend>Form Title</legend>
+            <legend>Login</legend>
             {% csrf_token %}
             {{ form|bootstrap }}
             <div class="form-group">
