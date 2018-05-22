@@ -24,7 +24,7 @@
             {{ form|bootstrap }}
             <div class="form-group">
                 <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the
-                    <a href="#" target="_blank">Terms of Use</a> &amp; <a href="{% url 'search:privacy' %}" target="_blank">Privacy Policy</a></label>
+                    <a href="{% url 'search:terms' %}" target="_blank">Terms of Use</a> &amp; <a href="{% url 'search:privacy' %}" target="_blank">Privacy Policy</a></label>
                 <br>
                 <button type="submit" class="btn btn-success">Submit</button>
                 <a href="{% url 'search:index' %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Cancel</a>
