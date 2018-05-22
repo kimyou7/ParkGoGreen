@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'search.apps.SearchConfig',
     'django_tables2',
+    'bootstrapform',
 ]
 
 MIDDLEWARE = [
