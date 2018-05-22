@@ -176,6 +176,6 @@ class ReportDelete(PermissionRequiredMixin, generic.DeleteView):
 
 @permission_required('search.delete_report')
 def dash_table(request):
-    table = ReportTable(Report.objects.all())
+    table = ReportTable(Report.objects.all(), order_by='-sub_date')
     RequestConfig(request, paginate={'per_page': 10}).configure(table)
     return render(request, 'search/dashboard.html', {'table': table})
