@@ -18,5 +18,11 @@ urlpatterns = [
     path('dashboard/', views.dash_table, name='dashboard'),
     path('update/<int:pk>/', views.ReportUpdate.as_view(), name='report_update'),
     path('update/<int:pk>/delete/', views.ReportDelete.as_view(), name='report_delete'),
-    path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
+    path('about/', TemplateView.as_view(template_name='search/about.html'), name='about'),
+    path('about/damico/', TemplateView.as_view(template_name='search/damicoprofile.html'), name='damico'),
+    path('about/jaimes/', TemplateView.as_view(template_name='search/jaimes.html'), name='jaimes'),
+    path('about/justice/', TemplateView.as_view(template_name='search/justiceprofile.html'), name='justice'),
+    path('about/andrew/', TemplateView.as_view(template_name='search/andrewprofile.html'), name='andrew'),
+    path('about/leo/', TemplateView.as_view(template_name='search/leoprofile.html'), name='leo'),
+    path('about/kimyou/', TemplateView.as_view(template_name='search/kimprofile.html'), name='kimyou'),
 ]

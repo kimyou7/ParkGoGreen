@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <title>About page</title>
@@ -18,7 +19,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div class="w3-third">
       <div class="w3-white w3-text-grey w3-card-4">
         <div class="w3-display-container">
-           <img src="damicoprofile.jpg" style="width:50%" alt="Avatar">
+           <img src="{% static "search/damicoprofile.jpg" %}" style="width:50%" alt="Avatar">
           <div class="w3-display-bottomleft w3-container w3-text-white">
             <h3>Damico Shields</h3>
           </div>

@@ -1,14 +1,15 @@
 {% extends "search/base_generic.html" %}
 
 {% block content %}
+    <br>
     <div class="container">
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action">Damico Shields</a>
-            <a href="#" class="list-group-item list-group-item-action">Jaimes Subroto</a>
-            <a href="#" class="list-group-item list-group-item-action">Andrew Hutzel</a>
-            <a href="#" class="list-group-item list-group-item-action">Justice Chase</a>
-            <a href="#" class="list-group-item list-group-item-action">Kimyou By</a>
-            <a href="#" class="list-group-item list-group-item-action">Leo Wang</a>
+            <a href="{% url 'search:damico' %}" class="list-group-item list-group-item-action">Damico Shields</a>
+            <a href="{% url 'search:jaimes' %}" class="list-group-item list-group-item-action">Jaimes Subroto</a>
+            <a href="{% url 'search:andrew' %}" class="list-group-item list-group-item-action">Andrew Hutzel</a>
+            <a href="{% url 'search:justice' %}" class="list-group-item list-group-item-action">Justice Chase</a>
+            <a href="{% url 'search:kimyou' %}" class="list-group-item list-group-item-action">Kimyou By</a>
+            <a href="{% url 'search:leo' %}" class="list-group-item list-group-item-action">Leo Wang</a>
         </div>
     </div>
 {% endblock %}
