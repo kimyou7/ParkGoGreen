@@ -2,22 +2,28 @@
 {% load bootstrap %}
 
 {% block content %}
-    <div class="container">
-        {% if next %}
-            {% if user.is_authenticated %}
-                <p>Your account doesn't have access to this page. To proceed, please login with an account that has
-                    access.</p>
-            {% else %}
-                <p>Please login to see this page.</p>
-            {% endif %}
-        {% endif %}
-        <form role="form" method="post" action="{% url 'login' %}">
-            <legend>Login</legend>
-            {% csrf_token %}
-            {{ form|bootstrap }}
-            <div class="form-group">
-                <button type="submit" class="btn btn-success">Submit</button>
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+            <div class="container">
+                {% if next %}
+                    {% if user.is_authenticated %}
+                        <p>Your account doesn't have access to this page. To proceed, please login with an account
+                            that has access.</p>
+                    {% else %}
+                        <p>Please login to see this page.</p>
+                    {% endif %}
+                {% endif %}
+                <form role="form" method="post" action="{% url 'login' %}">
+                    <legend>Login</legend>
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
+        <div class="col-sm"></div>
     </div>
 {% endblock %}

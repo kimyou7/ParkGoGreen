@@ -2,35 +2,43 @@
 {% load bootstrap %}
 
 {% block content %}
-    <div class="container">
-        <br>
-        {% if form.errors %}
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-            {% endfor %}
-        {% endif %}
-        <form role="form" method="post">
-            <legend>Sign Up</legend>
-            {% csrf_token %}
-            {{ form|bootstrap }}
-            <div class="form-group">
-                <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the
-                    <a href="{% url 'search:terms' %}" target="_blank">Terms of Use</a> &amp; <a href="{% url 'search:privacy' %}" target="_blank">Privacy Policy</a></label>
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+            <div class="container">
                 <br>
-                <button type="submit" class="btn btn-success">Submit</button>
-                <a href="{% url 'search:index' %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Cancel</a>
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <form role="form" method="post">
+                    <legend>Sign Up</legend>
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                    <div class="form-group">
+                        <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the
+                            <a href="{% url 'search:terms' %}" target="_blank">Terms of Use</a> &amp;
+                            <a href="{% url 'search:privacy' %}" target="_blank">Privacy Policy</a></label>
+                        <br>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a href="{% url 'search:index' %}" class="btn btn-outline-secondary"
+                           role="button" aria-pressed="true">Cancel</a>
+                    </div>
+                </form>
+                <div class="text-center">Already have an account? <a href="{% url 'login' %}">Login here</a></div>
+                <br>
             </div>
-        </form>
-        <div class="text-center">Already have an account? <a href="{% url 'login' %}">Login here</a></div>
-    <br>
+        </div>
+        <div class="col-sm"></div>
     </div>
 {% endblock %}

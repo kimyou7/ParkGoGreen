@@ -2,35 +2,42 @@
 {% load bootstrap %}
 
 {% block content %}
-    <br>
-    {% if not user.is_authenticated %}
-        <div class="alert alert-danger">
-        <strong>Please log in  or sign up to post reports.</strong>
-        </div>
-    {% endif %}
-    {% if form.errors %}
-        {% for field in form %}
-            {% for error in field.errors %}
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+            <br>
+            {% if not user.is_authenticated %}
                 <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
+                    <strong>Please log in  or sign up to post reports.</strong>
                 </div>
-            {% endfor %}
-        {% endfor %}
-        {% for error in form.non_field_errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
+            {% endif %}
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="container">
+                <form role="form" method="post" enctype="multipart/form-data">
+                    <legend>Post a new report</legend>
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a href="{% url 'search:index' %}" class="btn btn-outline-secondary"
+                           role="button" aria-pressed="true">Cancel</a>
+                    </div>
+                </form>
             </div>
-        {% endfor %}
-    {% endif %}
-    <div class="container">
-        <form role="form" method="post" enctype="multipart/form-data">
-            <legend>Post a new report</legend>
-            {% csrf_token %}
-            {{ form|bootstrap }}
-            <div class="form-group">
-                <button type="submit" class="btn btn-success">Submit</button>
-                <a href="{% url 'search:index' %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Cancel</a>
-            </div>
-        </form>
+        </div>
+        <div class="col-sm"></div>
     </div>
 {% endblock %}
