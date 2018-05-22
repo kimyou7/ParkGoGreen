@@ -2,14 +2,20 @@
 
 {% block content %}
     <br>
-    <div class="container">
-        <div class="list-group">
-            <a href="{% url 'search:damico' %}" class="list-group-item list-group-item-action" target="_blank">Damico Shields</a>
-            <a href="{% url 'search:jaimes' %}" class="list-group-item list-group-item-action" target="_blank">Jaimes Subroto</a>
-            <a href="{% url 'search:andrew' %}" class="list-group-item list-group-item-action" target="_blank">Andrew Hutzel</a>
-            <a href="{% url 'search:justice' %}" class="list-group-item list-group-item-action" target="_blank">Justice Chase</a>
-            <a href="{% url 'search:kimyou' %}" class="list-group-item list-group-item-action" target="_blank">Kimyou By</a>
-            <a href="{% url 'search:leo' %}" class="list-group-item list-group-item-action" target="_blank">Leo Wang</a>
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+            <div class="container">
+                <div class="list-group">
+                    <a href="{% url 'search:damico' %}" class="list-group-item list-group-item-action" target="_blank">Damico Shields</a>
+                    <a href="{% url 'search:jaimes' %}" class="list-group-item list-group-item-action" target="_blank">Jaimes Subroto</a>
+                    <a href="{% url 'search:andrew' %}" class="list-group-item list-group-item-action" target="_blank">Andrew Hutzel</a>
+                    <a href="{% url 'search:justice' %}" class="list-group-item list-group-item-action" target="_blank">Justice Chase</a>
+                    <a href="{% url 'search:kimyou' %}" class="list-group-item list-group-item-action" target="_blank">Kimyou By</a>
+                    <a href="{% url 'search:leo' %}" class="list-group-item list-group-item-action" target="_blank">Leo Wang</a>
+                </div>
+            </div>
         </div>
+        <div class="col-sm"></div>
     </div>
 {% endblock %}
