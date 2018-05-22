@@ -61,7 +61,7 @@ class Status(models.Model):
 # a thumbnail is created, saved to the csc648-team13/media/thumbs folder, and the url is added to the thumbnail field.
 class Report(models.Model):
     sub_date = models.DateTimeField(auto_now_add=True)
-    description = models.CharField(max_length=1000)
+    description = models.TextField(max_length=1000)
     image = models.ImageField(upload_to='photos', null=True, blank=True)
     thumbnail = models.ImageField(upload_to='thumbs', editable=False, null=True)
     type = models.ForeignKey(Category, on_delete=models.CASCADE)
