@@ -2,9 +2,9 @@
 
 - TODO:
 
-Milestone 2
+Milestone
 - Vertical protoype
 
 - Mockups, storyboards
 
-- Milestone 2 document
+- Code Document
