@@ -1,4 +1,4 @@
-# csc648-team13
+# ParkGoGreen Development Team
 
 - TODO:
 
